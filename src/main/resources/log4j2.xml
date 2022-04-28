@@ -10,7 +10,7 @@
     </Appenders>
 
     <loggers>
-        <logger name="org.springframework" level="INFO" additivity="false">
+        <logger name="org.springframework" level="TRACE" additivity="false">
             <appender-ref ref="console" />
         </logger>
 
