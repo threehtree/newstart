@@ -48,7 +48,16 @@ public class BoardMapperTests {
         log.info(board);
     }
 
-
+    @Test
+    public void testUpdate(){
+        Board board= Board.builder()
+                .writer("쓰기")
+                .content("콘탠츠")
+                .title("제목")
+                .bno(5439386)
+                .build();
+        boardMaper.update(board);
+    }
 
 
 }

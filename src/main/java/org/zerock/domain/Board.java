@@ -3,6 +3,8 @@ package org.zerock.domain;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+
 @Getter //VO니까
 @AllArgsConstructor //모든 프로퍼티 생성자로 사용
 @Builder //생성자를 일부만 넣고 싶을때 유용 (AllArgsConstructor와 따라다닌다고 보자
@@ -15,6 +17,9 @@ public class Board {
     private String title;
     private String content;
     private String writer;
+
+    private LocalDateTime regDate;
+    private LocalDateTime updateDate;
 
 
 }

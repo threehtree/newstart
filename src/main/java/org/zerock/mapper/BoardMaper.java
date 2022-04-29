@@ -15,6 +15,7 @@ public interface BoardMaper {
 
     Board selectOne(Integer bno);
 
+    void update(Board board);
 
 
 }
