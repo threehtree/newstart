@@ -26,6 +26,7 @@ public class BoardMapperTests {
                .build();
 
        boardMaper.insert(board);
+       log.info(board);
 
     }
     @Test
