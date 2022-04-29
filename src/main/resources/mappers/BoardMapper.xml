@@ -24,4 +24,8 @@
         delete from tbl_board where bno =#{num};
     </delete>
 
+    <select id="selectOne" resultType="org.zerock.domain.Board">
+        select * from tbl_board where bno = #{bno}
+    </select>
+
 </mapper>

@@ -13,5 +13,8 @@ public interface BoardMaper {
 
     void delete(Integer bno);
 
+    Board selectOne(Integer bno);
+
+
 
 }

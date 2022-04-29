@@ -41,6 +41,12 @@ public class BoardMapperTests {
         boardMaper.delete(bno);
 
     }
+    @Test
+    public void testSelectOne(){
+        int bno =5439386;
+        Board board =boardMaper.selectOne(bno);
+        log.info(board);
+    }
 
 
 
