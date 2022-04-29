@@ -19,4 +19,9 @@
         from tbl_board order by bno desc limit #{skip}, #{size}
     </select>
 <!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
+
+    <delete id="delete">
+        delete from tbl_board where bno =#{num};
+    </delete>
+
 </mapper>

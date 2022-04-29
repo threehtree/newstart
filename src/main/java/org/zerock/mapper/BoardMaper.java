@@ -11,5 +11,7 @@ public interface BoardMaper {
     //SelectKey를 이용해서 마지막 index값 을 반환
     List<Board> selectList (@Param("skip") int num,@Param("size") int d);// 일단은 빈 생성자
 
+    void delete(Integer bno);
+
 
 }
