@@ -8,4 +8,9 @@
         insert into tbl_board(title, content, writer)
         VALUES ('#{title}','#{content}','#{writer}');
     </insert>
+<!--    select 같은경우는 값을 반환 해야 해서 받을 타입을 정해야 한다-->
+    <select id="selectList" resultType="org.zerock.domain.Board">
+        select title,content,writer
+        from tbl_board order by bno desc limit 0, 15;
+    </select>
 </mapper>
