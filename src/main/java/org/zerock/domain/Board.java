@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @NoArgsConstructor //빈 생성자 , 의존성주입 할때 사용하거나 할때 사용할때 자주 사용됨
 
 public class Board {
-
+ //나중에 쓸 데이터
     private Integer bno;
     private String title;
     private String content;
