@@ -30,7 +30,7 @@ public class BoardMapperTests {
     }
     @Test
     public void testSelectList(){
-        List<Board> boardList = boardMaper.selectList();
+        List<Board> boardList = boardMaper.selectList(0);
         boardList.forEach(board -> log.info(board));
     }
 
