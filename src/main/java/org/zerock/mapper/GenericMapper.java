@@ -5,7 +5,7 @@ import org.zerock.domain.Board;
 
 import java.util.List;
 
-public interface GenericMapper<E, K> {
+public interface GenericMapper<E, K> { //CRUD는 계속 다른곳에서도 사용할 예정
 
     void insert(E board);
     //SelectKey를 이용해서 마지막 index값 을 반환
