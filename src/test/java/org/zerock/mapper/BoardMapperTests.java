@@ -30,9 +30,9 @@ public class BoardMapperTests {
     }
     @Test
     public void testSelectList(){
-        List<Board> boardList = boardMaper.selectList(0);
+        List<Board> boardList = boardMaper.selectList(0,15);
         boardList.forEach(board -> log.info(board));
-    }
+    }// 2개 이상의 파라메터는 써야하는 정해진 이름으로 사용하면 가능하다
 
 
 
