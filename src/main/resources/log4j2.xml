@@ -10,16 +10,18 @@
     </Appenders>
 
     <loggers>
-        <logger name="org.springframework" level="TRACE" additivity="false">
+        <logger name="org.springframework" level="INFO" additivity="false">
             <appender-ref ref="console" />
+<!--            sql테스트 하는데 오류찾기 힘들어 래밸을 info로 낮춤 -->
         </logger>
 
         <logger name="org.zerock" level="INFO" additivity="false">
             <appender-ref ref="console" />
         </logger>
 
-        <logger name="org.zerock.springex.mapper" level="TRACE" additivity="false">
+        <logger name="org.zerock.mapper" level="TRACE" additivity="false">
             <appender-ref ref="console" />
+<!--          org.zerock.mapper 에서 사용하기 위해 log4에 등록해둔 경로인가   -->
         </logger>
 
         <root level="INFO" additivity="false">
