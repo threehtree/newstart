@@ -13,4 +13,5 @@
         select title,content,writer
         from tbl_board order by bno desc limit #{asdfasdf}, 15;
     </select>
+<!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
 </mapper>
