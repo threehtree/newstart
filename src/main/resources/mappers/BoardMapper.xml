@@ -11,7 +11,7 @@
 <!--    select 같은경우는 값을 반환 해야 해서 받을 타입을 정해야 한다-->
     <select id="selectList" resultType="org.zerock.domain.Board">
         select title,content,writer
-        from tbl_board order by bno desc limit #{param1}, #{param2};
+        from tbl_board order by bno desc limit #{skip}, #{size};
     </select>
 <!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
 </mapper>
