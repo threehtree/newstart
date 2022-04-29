@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.domain.Board;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -13,6 +14,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class BoardMapperTests {
    @Autowired(required = false)
    private BoardMaper boardMaper; //BoardMapper의존성이 필요하다
+
+    @Test
+    public void testInsert(){
+       Board board= Board.builder()
+               .writer("쓰기")
+               .content("콘탠츠")
+               .title("제목")
+               .build();
+
+       boardMaper.insert(board);
+
+    }
 
 
 
