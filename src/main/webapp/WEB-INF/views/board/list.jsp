@@ -15,7 +15,7 @@
         const result = '${result}'
 
         // console.log(result)
-        if(result) {
+        if(result !== '') {
             alert("처리됨")
         }
         //js는 뒤에 ; 필수가 아님
