@@ -9,6 +9,8 @@
 <!--    일일히 잡기 싫어서 패키지로 잡아줌-->
 
     <context:component-scan base-package="org.zerock.store"/>
+    <context:component-scan base-package="org.zerock.service"/>
+    <context:component-scan base-package="org.zerock.config"/>
 
 <!--    히카리 CP연결, 커넥션 풀 넓게 잡으려고 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">

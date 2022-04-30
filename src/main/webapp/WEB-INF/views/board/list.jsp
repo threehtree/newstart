@@ -13,8 +13,8 @@
 
 <body>
 
-<h1>${chi}</h1>
-
+<h1>${listDTO}</h1>
+<h1>${dtoList}</h1>
     <script>
         const result = '${result}'
 

@@ -1,17 +1,25 @@
 package org.zerock.controller;
 
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
 import org.zerock.dto.ListDTO;
+import org.zerock.service.BoardService;
+
+import java.util.List;
 
 @Controller
 @Log4j2
 @RequestMapping("/board/")
+@RequiredArgsConstructor //생생자를 위한 의존성 주입을 위해
 public class BoardController {
+
+    private final BoardService service;
 
     @GetMapping("/")
     public String basic(){
@@ -21,9 +29,11 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public void list(@ModelAttribute(name= "chi") ListDTO listDTO){
+    public void list(ListDTO listDTO, Model model){
         log.info("board list...");
         log.info(listDTO);
+        List<BoardDTO> dtoList = service.getList(listDTO);
+        model.addAttribute("dtoList",dtoList);
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
     ///WEB-INF/views/[  ].jsp 이런 식으로 맵핑해준다
     //public void 은 현재 url에서 값이 변할 필요 없을때 (return이 필요없음 )
