@@ -30,9 +30,10 @@ public class BoardController {
     @PostMapping("/register")
     public String registerPost(BoardDTO boardDTO){
         log.info("----------------");
-        
+
         return "redirect:/board/list";
     }//Post값을 보내기위해 seo 툴을 사용
     // log를 통해 이 페이지가 호출 되는지 확인
     // 보내주기만 하고 돌아와야하니 redirect
+    //보내주기위해 필요한 파라메터 BoardDTO 라는 통을 받아야함
 }
