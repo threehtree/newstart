@@ -10,7 +10,11 @@
 <head>
     <title>Board List</title>
 </head>
+
 <body>
+
+<h1>${chi}</h1>
+
     <script>
         const result = '${result}'
 

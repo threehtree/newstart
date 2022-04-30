@@ -3,10 +3,7 @@ package org.zerock.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
 import org.zerock.dto.ListDTO;
@@ -24,7 +21,7 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public void list(ListDTO listDTO){
+    public void list(@ModelAttribute(name= "chi") ListDTO listDTO){
         log.info("board list...");
         log.info(listDTO);
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
