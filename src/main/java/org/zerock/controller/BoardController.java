@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
 import org.zerock.dto.ListDTO;
 import org.zerock.dto.ListResponseDTO;
+import org.zerock.dto.PageMaker;
 import org.zerock.service.BoardService;
 
 import java.util.List;
@@ -35,7 +36,13 @@ public class BoardController {
         log.info(listDTO);
         ListResponseDTO<BoardDTO> responseDTO = service.getList(listDTO);
         model.addAttribute("dtoList",responseDTO.getDtoList());
-        model.addAttribute("total",responseDTO.getTotal());
+        int total = responseDTO.getTotal();
+//        model.addAttribute("total",total);
+        //어차피 pageMaker에 들어가니까 필요없어 보이네
+
+        model.addAttribute("pageMaker", new PageMaker(listDTO.getPage(),total));
+
+
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
     ///WEB-INF/views/[  ].jsp 이런 식으로 맵핑해준다
     //public void 은 현재 url에서 값이 변할 필요 없을때 (return이 필요없음 )

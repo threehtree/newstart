@@ -4,6 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zerock.mapper.BoardMaper">
+    <sql id="search">
+        <where>
+            <if test="keyword != null">
+                <foreach collection="types" item="item" separator="OR" open="(" close=")">
+                    <if test='item == "t"'>
+                        title like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "c"'>
+                        content like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "w"'>
+                        writer like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+    </sql>
     <insert id="insert">
         <selectKey resultType="int" keyProperty="bno" order="AFTER">
             select last_insert_id()
@@ -14,16 +31,30 @@
 <!--insert한 후에 bno를 받기 위해 select key 선언-->
 
 <!--    select 같은경우는 값을 반환 해야 해서 받을 타입을 정해야 한다-->
-    <select id="selectList" resultType="org.zerock.domain.Board">
-        select title,content,writer,updateDate
-        from tbl_board order by bno desc limit #{skip}, #{size}
+    <select id="selectList"  resultType="org.zerock.domain.Board">
+        select bno,title,content,writer,regDate,updateDate
+        from tbl_board
+
+        <include refid="search"></include>
+
+        order by bno desc
+        limit #{skip},#{size}
     </select>
-<!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
+
+    <!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
 <!--    mybatis는 getter를 보고 getskip, getsize로 찾는다 -->
+<!--    여기서 types는 ListDTO의 getTypes란 리스트 -->
+<!--    select 문이 이상없을려면 값이 있을때는 where 절이 있어야하고-->
+<!--    단 이때 where에 해당하는 값이 없으면 where을 만들면 안된다 -->
+<!--    동시에 3개 넣으면 sql이 다 이어져서 쿼리문이 이상해짐-->
+<!--  separator="or" 절 끝나면 or 추가 open="(" 절 시작시( close=")" 절 끝날시 )>  -->
+<!--    검색조건이 다른곳에서도 자주 쓰일거라 mybatis include 문법으로 뺌-->
 
     <select id="getTotal" resultType="int">
         select count(bno) from tbl_board
     </select>
+
+
 
     <delete id="delete">
         delete from tbl_board where bno =#{num};

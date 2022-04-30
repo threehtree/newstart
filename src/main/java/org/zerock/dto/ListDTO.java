@@ -9,10 +9,41 @@ public class ListDTO {
     private int page;
     private int size;
 
+
+    private String type;     //t, tc, tcw
+    private String keyword;
+    //검색 조건을 위한 프로퍼티
+    //페이징을 해주는 부분이면 검색은 당연하니까
+    //같이 모아둔 거 겟지(트렌젝션)
+
     public ListDTO(){
         this.page = 1;
         this.size = 10;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String[] getTypes(){
+        if(type == null){
+//            return null;
+            return new String[]{};
+        }
+        return type.split("");
+        //t tc tcw 한 단어씩 끊어내서 확인 할것
+    }
+
+    public String getKeyword(){
+        return keyword == null?null:keyword.trim();
+        //null일수도 잇으니 일단 반환은 해주자
+        //키워드로 공백 넣으면 검색이 매우 느려짐 null아니면 공백제거
+    }
+//앞선 작업에서 파라메터를 ListDTO로 잡았기 때문에 바로 mapper로 이동
 
     public void setPage(int page) {
         this.page = page <= 0? 1:page;

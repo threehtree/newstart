@@ -34,6 +34,8 @@ public class BoardMapperTests {
     public void testSelectList(){
         ListDTO listDTO = new ListDTO();
         //여기서 ListDTO 객체를 만들면 객체에 값이 들어가 있는가?
+        listDTO.setType("tcw");
+        listDTO.setKeyword("1111");
         List<Board> boardList = boardMaper.selectList(listDTO);
         boardList.forEach(board -> log.info(board));
     }// 2개 이상의 파라메터는 써야하는 정해진 이름으로 사용하면 가능하다
