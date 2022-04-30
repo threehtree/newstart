@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
+import org.zerock.dto.ListDTO;
 
 @Controller
 @Log4j2
@@ -22,12 +24,14 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public void list(int page){
+    public void list(ListDTO listDTO){
         log.info("board list...");
-        log.info("Page :" +page);
+        log.info(listDTO);
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
     ///WEB-INF/views/[  ].jsp 이런 식으로 맵핑해준다
     //public void 은 현재 url에서 값이 변할 필요 없을때 (return이 필요없음 )
+    //@RequestParam의 부족한 제약조건, page를 받을때 기본적으로 size도 같이쓰게 된다. 2파라메터 이상, page,size 트렌젝션
+    //DTO를 쓰면 파라메터의 갯수 수정시 DTO 만 수정하여 수정이 최소화됨
 
 
     @GetMapping("/register")
