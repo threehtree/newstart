@@ -12,10 +12,12 @@
 </head>
 <body>
     <script>
-        const result = ${param.result}
+        const result = ${result}
         console.log(result)
+        alert(result)
         //js는 뒤에 ; 필수가 아님
         //EL 을 사용해 result라는 값을 브라우저에서 받아옴
+        //RedirectAttributes 로 result라는 BoardDTO 이외의 값을 받음
     </script>
 </body>
 </html>
