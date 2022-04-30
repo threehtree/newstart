@@ -21,6 +21,10 @@
 <!--    하나의 파라메터만 받을때는 이름 상관없이 그냥 받을 수 있다-->
 <!--    mybatis는 getter를 보고 getskip, getsize로 찾는다 -->
 
+    <select id="getTotal" resultType="int">
+        select count(bno) from tbl_board
+    </select>
+
     <delete id="delete">
         delete from tbl_board where bno =#{num};
     </delete>

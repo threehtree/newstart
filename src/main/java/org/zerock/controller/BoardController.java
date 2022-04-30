@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.dto.BoardDTO;
 import org.zerock.dto.ListDTO;
+import org.zerock.dto.ListResponseDTO;
 import org.zerock.service.BoardService;
 
 import java.util.List;
@@ -32,8 +33,9 @@ public class BoardController {
     public void list(ListDTO listDTO, Model model){
         log.info("board list...");
         log.info(listDTO);
-        List<BoardDTO> dtoList = service.getList(listDTO);
-        model.addAttribute("dtoList",dtoList);
+        ListResponseDTO<BoardDTO> responseDTO = service.getList(listDTO);
+        model.addAttribute("dtoList",responseDTO.getDtoList());
+        model.addAttribute("total",responseDTO.getTotal());
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
     ///WEB-INF/views/[  ].jsp 이런 식으로 맵핑해준다
     //public void 은 현재 url에서 값이 변할 필요 없을때 (return이 필요없음 )
