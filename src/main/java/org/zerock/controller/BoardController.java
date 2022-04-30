@@ -22,11 +22,18 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public void list(){
+    public void list(int page){
         log.info("board list...");
+        log.info("Page :" +page);
     }//servlet.xml에 안의 In ternalResourceViewResolver 를 통해 /
     ///WEB-INF/views/[  ].jsp 이런 식으로 맵핑해준다
     //public void 은 현재 url에서 값이 변할 필요 없을때 (return이 필요없음 )
+
+
+    @GetMapping("/register")
+    public void registerGet(){
+
+    }
 
     @PostMapping("/register")
     public String registerPost(BoardDTO boardDTO, RedirectAttributes rttr){
