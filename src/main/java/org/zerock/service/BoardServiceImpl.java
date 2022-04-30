@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService{
     private final ModelMapper modelMapper; //Borad 로 받은 값을 BoardDto로 반환하기 위해
     @Override
     public List<BoardDTO> getList(ListDTO listDTO) {
-        List<Board> boardList = boardMaper.selectList(listDTO.getSkip(), listDTO.getSize());
+        List<Board> boardList = boardMaper.selectList(listDTO);
         //현재 반환타입이 Board 타입으로 받는다
         //하지만 service=> Controller는 DTO로 보내야 한다 => 변환환다
         List<BoardDTO> dtoList = boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class))
