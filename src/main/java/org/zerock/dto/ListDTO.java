@@ -38,6 +38,7 @@ public class ListDTO {
     public String[] getTypes(){
         if(type == null || type.trim().length() == 0){
             //////////****************************** video skip
+//            if(type == null){
 //            return null;
 //            return new String[]{};
         }
