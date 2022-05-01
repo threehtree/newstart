@@ -16,6 +16,7 @@
 <h1>${listDTO}</h1>
 <hr/>
 <h3>${pageMaker}</h3>
+<%--model check--%>
 <hr/>
 <%--<h5>${listDTO.getLink()}</h5>--%>
 <h5>${listDTO.link}</h5>
