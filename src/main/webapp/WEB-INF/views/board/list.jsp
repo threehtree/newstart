@@ -18,6 +18,16 @@
 <h3>${pageMaker}</h3>
 <%--model check--%>
 <hr/>
+<style>
+    .pagination {
+        display: flex;
+    }
+    .pagination .page-item{
+        margin: 0.3em;
+        list-style: none;
+    }
+</style>
+
 <%--<h5>${listDTO.getLink()}</h5>--%>
 <h5>${listDTO.link}</h5>
 <ul>
@@ -29,6 +39,23 @@
         </li>
     </c:forEach>
 </ul>
+
+<ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
+
 
 
     <script>
