@@ -48,8 +48,8 @@
     </li>
 
     <c:forEach begin="${pageMaker.start}" end="${pageMaker.end}" var="num">
-    <li class="page-item"><a class="page-link" href="${num}">${num}</a></li>
-<%--        일단 a태그의 기본 동작인 이동을 막아야지 --%>
+        <li class="page-item"><a class="page-link" href="${num}">${num}</a></li>
+        <%--        일단 a태그의 기본 동작인 이동을 막아야지 --%>
     </c:forEach>
 
     <li class="page-item">
@@ -59,36 +59,46 @@
     </li>
 </ul>
 
+<form class="actionForm" action="/board/list" method="get">
+    <input type="hidden" name="page" value="${listDTO.page}">
+    <input type="hidden" name="size" value="${listDTO.size}">
+    <input type="hidden" name="type" value="${listDTO.type}">
+    <input type="hidden" name="keyword" value="${listDTO.keyword}">
+</form>
 
 
-    <script>
+<script>
 
-        const linkTags= document.querySelectorAll(".page-link")
-        //page에 대해 전부 필요해서 배열로 받음
-        console.log(linkTags)
+    const linkTags= document.querySelectorAll(".page-link")
+    //page에 대해 전부 필요해서 배열로 받음
+    const actionForm = document.querySelector(".actionForm")
+    console.log(linkTags)
 
-        for (const tag123 of linkTags){
-            // console.log(tag123)
-            tag123.addEventListener("click",(e)=> {
-                e.preventDefault()
-                //a태그의 기본동작 방지
-                console.log(tag123.href)
-                //href 에들어간 전체 경로
-                console.log(tag123.getAttribute("href"))
-                //href 에서 Attribute 에 해당하는 값만.
-                // 일반적으로 우리가 쓰는건 이값
-            },false)
-        }
+    for (const tag123 of linkTags){
+        // console.log(tag123)
+        tag123.addEventListener("click",(e)=> {
+            e.preventDefault()
+            //a태그의 기본동작 방지
+            console.log(tag123.href)
+            //href 에들어간 전체 경로
+            const pageNum= tag123.getAttribute("href")
+            //href 에서 Attribute 에 해당하는 값만.
+            // 일반적으로 우리가 쓰는건 이값
 
-        const result = '${result}'
+            actionForm.querySelector("input[name = 'page']").value = pageNum
+            actionForm.submit()
+        },false)
+    }
 
-        // console.log(result)
-        if(result !== '') {
-            alert("처리됨")
-        }
-        //js는 뒤에 ; 필수가 아님
-        //EL 을 사용해 result라는 값을 브라우저에서 받아옴
-        //RedirectAttributes 로 result라는 BoardDTO 이외의 값을 받음
-    </script>
+    const result = '${result}'
+
+    // console.log(result)
+    if(result !== '') {
+        alert("처리됨")
+    }
+    //js는 뒤에 ; 필수가 아님
+    //EL 을 사용해 result라는 값을 브라우저에서 받아옴
+    //RedirectAttributes 로 result라는 BoardDTO 이외의 값을 받음
+</script>
 </body>
 </html>
