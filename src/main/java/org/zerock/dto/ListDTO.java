@@ -2,6 +2,7 @@ package org.zerock.dto;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @ToString
 @Getter// setter은 바로 안넣으셧네
@@ -15,6 +16,8 @@ public class ListDTO {
     //검색 조건을 위한 프로퍼티
     //페이징을 해주는 부분이면 검색은 당연하니까
     //같이 모아둔 거 겟지(트렌젝션)
+
+    private String link;
 
     public ListDTO(){
         this.page = 1;
@@ -67,4 +70,23 @@ public class ListDTO {
 //여기서는 size, page , skip  값이 였다
 
     //1. 파라메터가 2개(이상or예정), 2. 복잡한 제약조건
+
+    public String getLink(){
+//        StringBuilder builder = new StringBuilder();
+        UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+        builder.queryParam("page", page);
+        builder.queryParam("size", getSize());
+
+        if(type !=null){
+            builder.queryParam("type", type);
+        }
+
+        if(keyword !=null){
+            builder.queryParam("keyword", keyword);
+        }
+
+        return builder.build().toString();
+    }
+    //서버사이드 랜더링 >> 서버에서 모든 작업을 끝내고 화면은 보여만 준다
+    //주소를 연결해서 만들어주는 from
 }

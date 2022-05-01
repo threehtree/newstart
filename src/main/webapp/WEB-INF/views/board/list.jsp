@@ -6,15 +6,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>Board List</title>
 </head>
 
 <body>
-<h3>${pageMaker}</h3>
 <h1>${listDTO}</h1>
-<h1>${dtoList}</h1>
+<hr/>
+<h3>${pageMaker}</h3>
+<hr/>
+<%--<h5>${listDTO.getLink()}</h5>--%>
+<h5>${listDTO.link}</h5>
+<ul>
+
+    <c:forEach items="${dtoList}" var="board">
+        <li>
+            <span> ${board.bno}</span>
+            <span>${board.title}</span>
+        </li>
+    </c:forEach>
+</ul>
+
 
     <script>
         const result = '${result}'
