@@ -34,13 +34,21 @@
 <div class="searchDiv">
     <select class="type">
         <option value="">---</option>
-        <option value="t">제목</option>
-        <option value="tc">제목내용</option>
-        <option value="tcw">제목내용작성자</option>
+        <option value="t" ${listDTO.type == "t"?"selected":""}>제목</option>
+        <option value="tc" ${listDTO.type == "tc"?"selected":""}>제목내용</option>
+        <option value="tcw" ${listDTO.type == "tcw"?"selected":""}>제목내용작성자</option>
+<%--        type에 선택에서 해당하는 검색 조건을 유지해두기 위한 selected << html 문법인듯합니다 --%>
+<%--        <option> 태그의 selected 속성은 페이지가 로드될 때 옵션 중에서 미리 선택되어지는 옵션을 명시합니다.--%>
     </select>
-    <input type="text" name="keyword">
-    <button>Search</button>
+    <input type="text" name="keyword" value="${listDTO.keyword}">
+<%--    keyword 가 유지가 된다.--%>
+<%--    input 의 value에 값이 입력되있으면 유지 인가 --%>
+
+    <button class="searchBtn">Search</button>
 </div>
+
+
+
 <ul>
 
     <c:forEach items="${dtoList}" var="board">
@@ -100,6 +108,12 @@
             actionForm.submit()
         },false)
     }
+    document.querySelector(".searchBtn").addEventListener("click",(e)=>{
+        const type = document.querySelector('.searchDiv .type').value
+        const keyword = document.querySelector(".searchDiv input[name='keyword']").value
+
+        console.log(type,keyword)
+    },false)
 
     const result = '${result}'
 
