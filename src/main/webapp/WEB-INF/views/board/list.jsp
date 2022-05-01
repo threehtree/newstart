@@ -46,9 +46,12 @@
             <span aria-hidden="true">&laquo;</span>
         </a>
     </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+    <c:forEach begin="${pageMaker.start}" end="${pageMaker.end}" var="num">
+    <li class="page-item"><a class="page-link" href="${num}">${num}</a></li>
+<%--        일단 a태그의 기본 동작인 이동을 막아야지 --%>
+    </c:forEach>
+
     <li class="page-item">
         <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
@@ -59,6 +62,24 @@
 
 
     <script>
+
+        const linkTags= document.querySelectorAll(".page-link")
+        //page에 대해 전부 필요해서 배열로 받음
+        console.log(linkTags)
+
+        for (const tag123 of linkTags){
+            // console.log(tag123)
+            tag123.addEventListener("click",(e)=> {
+                e.preventDefault()
+                //a태그의 기본동작 방지
+                console.log(tag123.href)
+                //href 에들어간 전체 경로
+                console.log(tag123.getAttribute("href"))
+                //href 에서 Attribute 에 해당하는 값만.
+                // 일반적으로 우리가 쓰는건 이값
+            },false)
+        }
+
         const result = '${result}'
 
         // console.log(result)
