@@ -80,9 +80,11 @@
 
 <form class="actionForm" action="/board/list" method="get">
     <input type="hidden" name="page" value="${listDTO.page}">
+<%--    검색을 하면 일단 page는 1--%>
     <input type="hidden" name="size" value="${listDTO.size}">
     <input type="hidden" name="type" value="${listDTO.type}">
     <input type="hidden" name="keyword" value="${listDTO.keyword}">
+<%--    type, keyword는 검색한 값으로 대입함--%>
 </form>
 
 
@@ -91,6 +93,7 @@
     const linkTags= document.querySelectorAll(".page-link")
     //page에 대해 전부 필요해서 배열로 받음
     const actionForm = document.querySelector(".actionForm")
+    //이거 자주 쓰니까 꺼내둠
     console.log(linkTags)
 
     for (const tag123 of linkTags){
@@ -113,6 +116,11 @@
         const keyword = document.querySelector(".searchDiv input[name='keyword']").value
 
         console.log(type,keyword)
+
+        actionForm.querySelector("input[name='page']").value =1
+        actionForm.querySelector("input[name='type']").value = type
+        actionForm.querySelector("input[name='keyword']").value = keyword
+        //위에서 말한 것 처럼 조회할때의 조건은 page는 1페이지, type,keyword는 입력받은 값을 받아서 해야지
     },false)
 
     const result = '${result}'
