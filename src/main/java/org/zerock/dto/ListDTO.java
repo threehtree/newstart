@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @ToString
 @Getter// setter은 바로 안넣으셧네
 public class ListDTO {
@@ -72,17 +75,25 @@ public class ListDTO {
     //1. 파라메터가 2개(이상or예정), 2. 복잡한 제약조건
 
     public String getLink(){
+
 //        StringBuilder builder = new StringBuilder();
         UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-        builder.queryParam("page", page);
-        builder.queryParam("size", getSize());
+        builder.queryParam("page", getPage())
+                .queryParam("size", getSize());
 
         if(type !=null){
             builder.queryParam("type", type);
         }
 
         if(keyword !=null){
-            builder.queryParam("keyword", keyword);
+            String enStr = null;
+            try {
+                enStr = URLEncoder.encode(keyword,"UTF-8");
+                builder.queryParam("keyword",enStr);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
         }
 
         return builder.build().toString();

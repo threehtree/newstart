@@ -24,7 +24,7 @@
     <c:forEach items="${dtoList}" var="board">
         <li>
             <span> ${board.bno}</span>
-            <span>${board.title}</span>
+            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>
         </li>
     </c:forEach>
 </ul>
