@@ -122,6 +122,8 @@
         actionForm.querySelector("input[name='keyword']").value = keyword
         //위에서 말한 것 처럼 조회할때의 조건은 page는 1페이지, type,keyword는 입력받은 값을 받아서 해야지
         actionForm.submit()
+        //여기서 추가로 bno만 있으면 조회 기능에 필요한 값도 다 들어가네
+        //경로도 read로만 바꿔주면 되네
     },false)
 
     const result = '${result}'
