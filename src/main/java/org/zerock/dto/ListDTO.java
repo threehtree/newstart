@@ -36,16 +36,19 @@ public class ListDTO {
     }
 
     public String[] getTypes(){
-        if(type == null){
+        if(type == null || type.trim().length() == 0){
+            //////////****************************** video skip
 //            return null;
-            return new String[]{};
+//            return new String[]{};
         }
         return type.split("");
         //t tc tcw 한 단어씩 끊어내서 확인 할것
     }
 
     public String getKeyword(){
-        return keyword == null?null:keyword.trim();
+        return keyword ==null  || keyword.trim().length() == 0 ? null: keyword.trim();
+        //////////****************************** video skip
+//        return keyword == null?null:keyword.trim()
         //null일수도 잇으니 일단 반환은 해주자
         //키워드로 공백 넣으면 검색이 매우 느려짐 null아니면 공백제거
     }
