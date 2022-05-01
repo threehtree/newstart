@@ -30,6 +30,17 @@
 
 <%--<h5>${listDTO.getLink()}</h5>--%>
 <h5>${listDTO.link}</h5>
+
+<div class="searchDiv">
+    <select class="type">
+        <option value="">---</option>
+        <option value="t">제목</option>
+        <option value="tc">제목내용</option>
+        <option value="tcw">제목내용작성자</option>
+    </select>
+    <input type="text" name="keyword">
+    <button>Search</button>
+</div>
 <ul>
 
     <c:forEach items="${dtoList}" var="board">
