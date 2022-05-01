@@ -121,6 +121,7 @@
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
         //위에서 말한 것 처럼 조회할때의 조건은 page는 1페이지, type,keyword는 입력받은 값을 받아서 해야지
+        actionForm.submit()
     },false)
 
     const result = '${result}'
