@@ -110,6 +110,7 @@
             return
         }
         const url = target.getAttribute("href")
+
         // alert(url)
         //target의 위치를 찾아 href값 꺼냄
         //여기서 href값은 href='/board/read/$.{board.bno}'이다 /board/read/게시물 번호 로
@@ -137,7 +138,8 @@
         const pageNum = target .getAttribute("href")
 
         actionForm.querySelector("input[name='page']").value = pageNum
-
+        actionForm.setAttribute("action", "/board/list")
+        //뒤로가기 문제 방지
         actionForm.submit()
 
 
@@ -167,6 +169,8 @@
 
         console.log(type,keyword)
 
+        actionForm.setAttribute("action", "/board/list")
+        //form으로 값 보내고 값이 안바뀌어 있어서 뒤로가기 문제 방지
         actionForm.querySelector("input[name='page']").value =1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
