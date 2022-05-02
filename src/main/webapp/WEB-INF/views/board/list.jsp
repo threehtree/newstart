@@ -49,15 +49,19 @@
 
 
 
-<ul>
+<ul class ="dtoList">
 
     <c:forEach items="${dtoList}" var="board">
         <li>
             <span> ${board.bno}</span>
-            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>
+            <span><a href='/board/read/${board.bno}' class="dtoLink "> ${board.title}</a></span>
+<%--            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>--%>
+<%--        이제 반복문을 사용하지 않고 위임을 사용하면 이벤트를 한번만 줄 수 있다  --%>
         </li>
     </c:forEach>
 </ul>
+<%--만약 이렇게 링크를 주는걸 js를 통해서 햇으면 이벤트 위임을 이용해 훨씬 쉽고 간편하게 만들었겟지 --%>
+<%--다만 단점도 있긴한데 검색엔진이 링크를 받을때는 페이지 번호만 받음 ((link로 만들어주면되지--%>
 
 <ul class="pagination">
     <li class="page-item">
@@ -96,6 +100,25 @@
     const actionForm = document.querySelector(".actionForm")
     //이거 자주 쓰니까 꺼내둠
     // console.log(linkTags)
+
+    document.querySelector(".dtoList").addEventListener("click",(e)=>{
+
+        e.preventDefault()
+        e.stopPropagation()
+        const target  = e.target
+        if(target.getAttribute("class").indexOf('dtoLink') < 0){
+            return
+        }
+        const url = target.getAttribute("href")
+        // alert(url)
+        //target의 위치를 찾아 href값 꺼냄
+        actionForm.setAttribute("action", url)
+        actionForm.submit()
+        //이제 조회페이지에서 bno, page, size필요
+        //계속 유지지    },false)
+    //지난번 자바로 작업했던 반복문 이벤트리스너를
+    // 이벤트 위임으로 한방에 정리
+
 
     linkDiv.addEventListener("click", (e) =>{
         e.stopPropagation() //전파 멈춰라
