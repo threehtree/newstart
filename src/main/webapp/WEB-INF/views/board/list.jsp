@@ -108,9 +108,10 @@
             return
         }
 
-        console.log("11111111111111111111111")
         const pageNum = target .getAttribute("href")
-        alert(pageNum)
+        actionForm.querySelector("input[name='page']").value = pageNum
+
+        actionForm.submit()
 
 
     },false)
