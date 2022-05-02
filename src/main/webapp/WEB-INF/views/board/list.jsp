@@ -90,27 +90,49 @@
 
 <script>
 
-    const linkTags= document.querySelectorAll(".page-link")
+    const linkDiv = document.querySelector(".pagination")
     //page에 대해 전부 필요해서 배열로 받음
+    //이제 이벤트 위임으로 값을 넘겨받을거니 querySelector로 바꿈
     const actionForm = document.querySelector(".actionForm")
     //이거 자주 쓰니까 꺼내둠
-    console.log(linkTags)
+    // console.log(linkTags)
 
-    for (const tag123 of linkTags){
-        // console.log(tag123)
-        tag123.addEventListener("click",(e)=> {
-            e.preventDefault()
-            //a태그의 기본동작 방지
-            console.log(tag123.href)
-            //href 에들어간 전체 경로
-            const pageNum= tag123.getAttribute("href")
-            //href 에서 Attribute 에 해당하는 값만.
-            // 일반적으로 우리가 쓰는건 이값
+    linkDiv.addEventListener("click", (e) =>{
+        e.stopPropagation() //전파 멈춰라
+        e.preventDefault() //태그의 기본기능을 멈춰라
 
-            actionForm.querySelector("input[name = 'page']").value = pageNum
-            actionForm.submit()
-        },false)
-    }
+        const target = e.target
+
+        if(target.getAttribute("class") !== 'page-link') {
+
+            return
+        }
+
+        console.log("11111111111111111111111")
+        const pageNum = target .getAttribute("href")
+        alert(pageNum)
+
+
+    },false)
+
+
+
+    // for (const tag123 of linkTags){
+    //     // console.log(tag123)
+    //     tag123.addEventListener("click",(e)=> {
+    //         e.preventDefault()
+    //         //a태그의 기본동작 방지
+    //         console.log(tag123.href)
+    //         //href 에들어간 전체 경로
+    //         const pageNum= tag123.getAttribute("href")
+    //         //href 에서 Attribute 에 해당하는 값만.
+    //         // 일반적으로 우리가 쓰는건 이값
+    //
+    //
+    //         actionForm.querySelector("input[name = 'page']").value = pageNum
+    //         actionForm.submit()
+    //     },false)
+    // }
     document.querySelector(".searchBtn").addEventListener("click",(e)=>{
         const type = document.querySelector('.searchDiv .type').value
         const keyword = document.querySelector(".searchDiv input[name='keyword']").value
