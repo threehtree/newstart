@@ -24,7 +24,7 @@ public class BoardController {
     private final BoardService service;
 
     @GetMapping("/read/{bno}")
-    public String read(@PathVariable("bno") Long bno, ListDTO listDTO){
+    public String read(@PathVariable("bno") Long bno, ListDTO listDTO){ //
 
         log.info("---------------------------------");
 
@@ -33,6 +33,7 @@ public class BoardController {
         log.info(listDTO);
 
         return "/board/read";
+        //사용자가 정의한 DTO는 다른 정의 없어도 jsp로 전달이 된다
     }
 
     @GetMapping("/")

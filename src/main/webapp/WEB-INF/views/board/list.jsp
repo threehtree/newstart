@@ -112,12 +112,15 @@
         const url = target.getAttribute("href")
         // alert(url)
         //target의 위치를 찾아 href값 꺼냄
+        //여기서 href값은 href='/board/read/$.{board.bno}'이다 /board/read/게시물 번호 로
         actionForm.setAttribute("action", url)
         actionForm.submit()
-        //이제 조회페이지에서 bno, page, size필요
+        //현재 우리에게 전달되는게 bno, 검색조건, 페이지 조건 이다
+        //read > list로 이동해야하는데 . 계속 유지해야하는 데이터는 model이다 그래서 listDTO를 계속 써야함
     },false)
     //지난번 자바로 작업했던 반복문 이벤트리스너를
     // 이벤트 위임으로 한방에 정리
+
 
 
     linkDiv.addEventListener("click", (e) =>{
