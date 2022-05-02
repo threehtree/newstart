@@ -115,7 +115,8 @@
         actionForm.setAttribute("action", url)
         actionForm.submit()
         //이제 조회페이지에서 bno, page, size필요
-        //계속 유지지    },false)
+
+    },false)
     //지난번 자바로 작업했던 반복문 이벤트리스너를
     // 이벤트 위임으로 한방에 정리
 
