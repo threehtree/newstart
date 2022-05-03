@@ -23,7 +23,7 @@ ${dto}
 </div>
 <div>
     <div>
-        <textarea name="content" value="<c:out value="${dto.content}"/>" >
+        <textarea name="content"><c:out value="${dto.content}"/></textarea>
     </div>
 </div>
 
