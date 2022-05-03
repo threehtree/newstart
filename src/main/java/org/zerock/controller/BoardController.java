@@ -105,7 +105,7 @@ public class BoardController {
     //BoardDTO라는 파라메터 이외에 필요한 값을 추가로 보내기위해 RedirectAttributes를 통해 전달
 
     @PostMapping("/remove/{bno}")
-    public String removePost(@PathVariable("bno") Integer bno){
+    public String removePost(@PathVariable("bno") Integer bno,RedirectAttributes rttr){
         log.info("-------------");
         log.info("-------------");
         log.info("remove" + bno);
@@ -117,6 +117,7 @@ public class BoardController {
             e.printStackTrace();
         }
         log.info("-------------");
+        rttr.addFlashAttribute("result", "removed");
 
         return "redirect:/board/list"; 
     }
