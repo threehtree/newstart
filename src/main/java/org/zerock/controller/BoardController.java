@@ -103,4 +103,21 @@ public class BoardController {
     //보내주기위해 필요한 파라메터 BoardDTO 라는 통을 받아야함
     //list?result=1234 쿼리스트링으로 result에 값을 전달태스트
     //BoardDTO라는 파라메터 이외에 필요한 값을 추가로 보내기위해 RedirectAttributes를 통해 전달
+
+    @PostMapping("/remove/{bno}")
+    public String removePost(@PathVariable("bno") Integer bno){
+        log.info("-------------");
+        log.info("-------------");
+        log.info("remove" + bno);
+        log.info("-------------");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info("-------------");
+
+        return "redirect:/board/list"; 
+    }
 }
