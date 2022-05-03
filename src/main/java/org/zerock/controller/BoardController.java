@@ -24,13 +24,17 @@ public class BoardController {
     private final BoardService service;
 
     @GetMapping("/read/{bno}")
-    public String read(@PathVariable("bno") Long bno, ListDTO listDTO){ //
+    public String read(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
+        //내가 따로 보내야하는값은 model을 이용한다
 
         log.info("---------------------------------");
 
         log.info(bno);
 
         log.info(listDTO);
+
+        model.addAttribute("dto", service.getOne(bno));
+        //쿼리 결과로 받은 boardDTO반환
 
         return "/board/read";
         //사용자가 정의한 DTO는 다른 정의 없어도 jsp로 전달이 된다

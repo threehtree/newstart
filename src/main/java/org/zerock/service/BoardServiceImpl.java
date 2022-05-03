@@ -34,4 +34,16 @@ public class BoardServiceImpl implements BoardService{
                 .total(boardMaper.getTotal(listDTO))
                 .build();
     }
+
+    @Override
+    public BoardDTO getOne(Integer bno) {
+        Board board = boardMaper.selectOne(bno);
+        //게시글 한가지 가져옴옴
+
+        BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
+        //여기서는 리스트 배열을 받거나 하는게 아니라 보드 만. 받음음
+        return boardDTO;
+    }
+
+
 }
