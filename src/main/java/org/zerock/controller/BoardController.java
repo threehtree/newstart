@@ -117,11 +117,8 @@ public class BoardController {
         log.info("remove" + bno);
         log.info("-------------");
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        service.remove(bno);
+
         log.info("-------------");
         rttr.addFlashAttribute("result", "removed");
 
