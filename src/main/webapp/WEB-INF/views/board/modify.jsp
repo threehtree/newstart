@@ -32,10 +32,7 @@ ${dto}
 
         const actionForm = sQuery(".actionForm")
 
-
         document.querySelector(".listBtn").addEventListener("click", (e)=>{
-
-
             self.location = `/board/list${listDTO.link}`
             //문자열을 만들때는 ` `로 감싸고 EL태그 그냥써야 합쳐지네
         },false)
