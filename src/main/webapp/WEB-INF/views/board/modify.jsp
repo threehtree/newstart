@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>Modify</title>
@@ -9,6 +10,23 @@
 <h1>Modify</h1>
 ${listDTO}/
 ${dto}
+
+<div>
+    <div>
+        <input type ="text" name="bno" value="<c:out value="${dto.bno}"/>" readonly>
+    </div>
+</div>
+<div>
+    <div>
+        <input type ="text" name="title" value="<c:out value="${dto.title}"/>" >
+    </div>
+</div>
+<div>
+    <div>
+        <textarea name="content" value="<c:out value="${dto.content}"/>" >
+    </div>
+</div>
+
 
 <div>
     <button class="listBtn">리스트</button>
