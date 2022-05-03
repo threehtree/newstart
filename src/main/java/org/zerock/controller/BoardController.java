@@ -40,6 +40,24 @@ public class BoardController {
         //사용자가 정의한 DTO는 다른 정의 없어도 jsp로 전달이 된다
     }
 
+    @GetMapping("/modify/{bno}")
+    public String modifyGET(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
+        //내가 따로 보내야하는값은 model을 이용한다
+
+        log.info("---------------------------------");
+
+        log.info(bno);
+
+        log.info(listDTO);
+
+        model.addAttribute("dto", service.getOne(bno));
+        //쿼리 결과로 받은 boardDTO반환
+
+        return "/board/modify";
+
+    }
+
+
     @GetMapping("/")
     public String basic(){
         return "redirect:/board/list";
