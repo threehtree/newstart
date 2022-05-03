@@ -104,6 +104,12 @@ public class BoardController {
     //list?result=1234 쿼리스트링으로 result에 값을 전달태스트
     //BoardDTO라는 파라메터 이외에 필요한 값을 추가로 보내기위해 RedirectAttributes를 통해 전달
 
+    @GetMapping("/remove/{bno}")
+    public String getNotsupported(){
+        return "redirect:/board/list";
+    }
+
+
     @PostMapping("/remove/{bno}")
     public String removePost(@PathVariable("bno") Integer bno,RedirectAttributes rttr){
         log.info("-------------");
