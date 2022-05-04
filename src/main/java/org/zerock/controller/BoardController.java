@@ -90,6 +90,8 @@ public class BoardController {
 
     }
 
+
+
     @PostMapping("/register")
     public String registerPost(BoardDTO boardDTO, RedirectAttributes rttr){
         log.info("----------------");
@@ -123,5 +125,23 @@ public class BoardController {
         rttr.addFlashAttribute("result", "removed");
 
         return "redirect:/board/list"; 
+    }
+    @PostMapping("/modify/{bno}")
+    public String modifyPost(@PathVariable("bno") Integer bno, BoardDTO boardDTO,ListDTO listDTO,RedirectAttributes rttr){
+        //
+        log.info("-------------");
+        log.info("-------------");
+        boardDTO.setBno(bno);
+        //수정하면서 bno값이 바뀔수 있어서 다시 지정
+        log.info("modify" + boardDTO);
+        //수정했으니까 수정내역을 보여줘야지
+        log.info("-------------");
+
+        service.remove(bno);
+
+        log.info("-------------");
+
+
+        return "redirect:/board/list";
     }
 }

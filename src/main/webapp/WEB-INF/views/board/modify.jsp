@@ -11,22 +11,30 @@
 ${listDTO}/
 ${dto}
 
-<div>
+<form action="/board/modify/${dto.bno}" method="post">
+    <input type="hidden" name="page" value="${listDTO.page}">
+<%--    form가 나온것 -> 값을 보낸다 --%>
+<%--    현재 ListDTO가 페이지에 관련된건 다 수집중--%>
+    <input type="hidden" name="size" value="${listDTO.size}">
+    <input type="hidden" name="type" value="${listDTO.type}">
+    <input type="hidden" name="keyword" value="${listDTO.keyword}">
     <div>
-        <input type ="text" name="bno" value="<c:out value="${dto.bno}"/>" readonly>
+        <div>
+            <input type ="text" name="bno" value="<c:out value="${dto.bno}"/>" readonly>
+        </div>
     </div>
-</div>
-<div>
     <div>
-        <input type ="text" name="title" value="<c:out value="${dto.title}"/>" >
+        <div>
+            <input type ="text" name="title" value="<c:out value="${dto.title}"/>" >
+        </div>
     </div>
-</div>
-<div>
     <div>
-        <textarea name="content"><c:out value="${dto.content}"/></textarea>
+        <div>
+            <textarea name="content"><c:out value="${dto.content}"/></textarea>
+<%--            <textarea></textarea> 이 사이에 여백있으면 랜더링때 그대로 반영됨 --%>
+        </div>
     </div>
-</div>
-
+</form>
 
 <div>
     <button class="listBtn">리스트</button>
