@@ -6,7 +6,9 @@
 </head>
 <body>
 ${listDTO}/
-${dto}
+<%--${dto}--%>
+<textarea>${dto.content}</textarea>
+<%--여기서 내용을 <script>를 넣어서 공격해봄 --%>
 <div>
 <button class="listBtn">리스트</button>
 <button class="modBtn">수정/삭제</button>
