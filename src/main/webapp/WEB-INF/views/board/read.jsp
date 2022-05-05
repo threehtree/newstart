@@ -43,7 +43,7 @@
     const bno = ${dto.bno}
         getReplyList(bno)
             .then(arr=>{
-                const liStr=arr.map(replyDTO => `<li>${replyDTO.rno}</li>`).join(" ")
+                const liStr=arr.map(replyDTO => `<li>\${replyDTO.rno}</li>`).join(" ")
                 document.querySelector(".replyUL").innerHTML = liStr
             })
             .catch(err=> console.log(err))
