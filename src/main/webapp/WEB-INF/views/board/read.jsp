@@ -24,11 +24,14 @@
 <script>
 
     async function getReplyList(bno){
-
+        try{
         const res = await axios.get(`/replies/list/${bno}`)
         const data = res.data
 
         return data
+        }catch (err){
+            return err
+        }
     }
 
     const bno = ${dto.bno}
