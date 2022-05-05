@@ -139,12 +139,16 @@ public class BoardController {
         //수정했으니까 수정내역을 보여줘야지
         log.info("-------------");
 
-        rttr.addAttribute("bno", bno);
+//        rttr.addAttribute("bno", bno);
         //redirect시 지금 나의bno값이 uri를 통해 전달된다?
+//        rttr.addAttribute("page", listDTO.getPage());
+        //우리는 이미 링크를 만들어 둿다
+
         log.info("-------------");
 
 
-        return "redirect:/board/read/"+bno;
+        return "redirect:/board/read/"+bno+listDTO.getLink();
         //우리가 방금 열어봣던 글로 돌아가야하니까
+        //listDTO에 이미 만들어 둿던 getLink사용
     }
 }
