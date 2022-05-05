@@ -18,6 +18,12 @@
 <%--    버튼에 '기능'을 달고싶다 > script > eventlistener --%>
 </div>
 
+<div>
+    <ul class="replyUL">
+
+    </ul>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <%--첫 axios 사용겸 async ,await 에 대한 설명이 나옴--%>
 
@@ -35,7 +41,12 @@
     }
 
     const bno = ${dto.bno}
-        getReplyList(bno).then(data => console.log(data))
+        getReplyList(bno)
+            .then(arr=>{
+                const liStr=arr.map(replyDTO => `<li>${replyDTO.rno}</li>`).join(" ")
+                document.querySelector(".replyUL").innerHTML = liStr
+            })
+            .catch(err=> console.log(err))
      //axios 첫 통신 확인
     //ajax 는 댓글 같은곳에 쓰면 되겟다
      document.querySelector(".listBtn").addEventListener("click", (e)=>{
