@@ -33,6 +33,7 @@ public class ReflyController {
     //위에서는 "난 Json의 형식만 만든다"
     public List<ReplyDTO> getListOfBoard(@PathVariable("bno") Integer bno){
         return replyService.getListOfBoard(bno);
+        //댓글 객체 전송
         //음.. Localdate 때문에 오류가 생기네
     }
 
