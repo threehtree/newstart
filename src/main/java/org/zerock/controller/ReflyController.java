@@ -3,15 +3,13 @@ package org.zerock.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.dto.ReplyDTO;
 import org.zerock.service.ReplyService;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 //jsp로 전달될때 json형식으로 전달된다
@@ -20,6 +18,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReflyController {
     private final ReplyService replyService;
+    @PostMapping("/")
+    public Map<String,Integer> register(@RequestBody ReplyDTO replyDTO){
+        log.info("+++++++++++++++++++++++++++");
+        log.info(replyDTO);
+        //일단 json잘 들어오는지 태스트 해보자 
+
+        return Map.of("result", 135);
+        //Json은 key:value 이런식이니
+    }
 
     @GetMapping("/test")
     public String[] get1(){
