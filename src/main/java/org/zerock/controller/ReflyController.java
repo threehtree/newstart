@@ -27,7 +27,7 @@ public class ReflyController {
     }
    //RESTful는 권고지 강제는 아니다
     //다만 우리는 댓글 단독조회가 아니라 게시글을 들린다
-    @GetMapping(value = "/list/{dto}", produces = MediaType.APPLICATION_JSON_VALUE )
+    @GetMapping(value = "/list/{bno}", produces = MediaType.APPLICATION_JSON_VALUE )
     //값이 계속 바뀐다면 쿼리스트링, 아니면 Pathvariable
     //produces는 어떤 형식의 값들을 만들어 질 수 있는지
     //위에서는 "난 Json의 형식만 만든다"

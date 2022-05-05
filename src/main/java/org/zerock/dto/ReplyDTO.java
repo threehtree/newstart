@@ -1,6 +1,7 @@
 package org.zerock.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +14,8 @@ public class ReplyDTO {
     private Integer bno;
     private String replyText;
     private String replyer;
+    @DateTimeFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime regdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime updateDate;
 }
