@@ -8,10 +8,12 @@
 <%--기능이 사실상 read 와 거의 똑같다--%>
 <body>
 <h1>Modify</h1>
-${listDTO}/
+${listDTO}///
 ${dto}
+${board}////
+<%--boarDTO는 서비스 단에서 넘겨줫어.--%>
 
-<form action="/board/modify/${dto.bno}" method="post">
+<form class="modForm" action="/board/modify/${dto.bno}" method="post">
     <input type="hidden" name="page" value="${listDTO.page}">
 <%--    form가 나온것 -> 값을 보낸다 --%>
 <%--    현재 ListDTO가 페이지에 관련된건 다 수집중--%>
@@ -70,6 +72,13 @@ ${dto}
             actionForm.submit()
 
         },false)
+
+        sQuery(".modPostBtn").addEventListener("click", (e)=>{
+
+            sQuery(".modForm").submit()
+
+        },false)
+    //이건 Post식으로 넘어가니까 url페이징한게 날라가버린다, ListDTO로 재지정해야겟다
 
     //현재 우리가 계속 써야하는 값이 ListDTO에 모두 있다
 </script>

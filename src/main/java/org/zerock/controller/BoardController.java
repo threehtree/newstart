@@ -127,8 +127,10 @@ public class BoardController {
         return "redirect:/board/list"; 
     }
     @PostMapping("/modify/{bno}")
-    public String modifyPost(@PathVariable("bno") Integer bno, BoardDTO boardDTO,ListDTO listDTO,RedirectAttributes rttr){
-        //
+    public String modifyPost(@PathVariable("bno") Integer bno,BoardDTO boardDTO, ListDTO listDTO,RedirectAttributes rttr){
+        //튕겨내면서 파라메터를 줄려면 redirectAttribute를 써야함
+        //검색조건 유지를 위해 ListDTO도 필요하다
+        //**그렇게 궁금햇던 @PathVariable은 URL경로의 bno를 가져온거임[pdf4참고]
         log.info("-------------");
         log.info("-------------");
         boardDTO.setBno(bno);
@@ -137,11 +139,12 @@ public class BoardController {
         //수정했으니까 수정내역을 보여줘야지
         log.info("-------------");
 
-        service.remove(bno);
-
+        rttr.addAttribute("bno", bno);
+        //redirect시 지금 나의bno값이 uri를 통해 전달된다?
         log.info("-------------");
 
 
-        return "redirect:/board/list";
+        return "redirect:/board/read/"+bno;
+        //우리가 방금 열어봣던 글로 돌아가야하니까
     }
 }
