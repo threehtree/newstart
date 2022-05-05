@@ -22,5 +22,5 @@ public class ReplyMapperTests {
         Integer bno = 451139;
         replyMapper.selectListOfBoard(bno).forEach(reply -> {log.info(reply);});
     }
-
+//테스트도 끝났으니 이제 기능 넣자 > service
 }
