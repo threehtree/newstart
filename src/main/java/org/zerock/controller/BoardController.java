@@ -138,6 +138,7 @@ public class BoardController {
         log.info("modify" + boardDTO);
         //수정했으니까 수정내역을 보여줘야지
         log.info("-------------");
+        service.update(boardDTO);
 
 //        rttr.addAttribute("bno", bno);
         //redirect시 지금 나의bno값이 uri를 통해 전달된다?
@@ -146,7 +147,6 @@ public class BoardController {
 
         log.info("-------------");
         rttr.addFlashAttribute("result", "modified");
-
 
         return "redirect:/board/read/"+bno+listDTO.getLink();
         //우리가 방금 열어봣던 글로 돌아가야하니까
