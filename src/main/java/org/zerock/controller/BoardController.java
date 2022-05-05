@@ -145,6 +145,7 @@ public class BoardController {
         //우리는 이미 링크를 만들어 둿다
 
         log.info("-------------");
+        rttr.addFlashAttribute("result", "modified");
 
 
         return "redirect:/board/read/"+bno+listDTO.getLink();
