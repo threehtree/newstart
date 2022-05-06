@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="org.zerock.sample"/>
 <!--    일일히 잡기 싫어서 패키지로 잡아줌-->
@@ -11,6 +12,9 @@
     <context:component-scan base-package="org.zerock.store"/>
     <context:component-scan base-package="org.zerock.service"/>
     <context:component-scan base-package="org.zerock.config"/>
+    <context:component-scan base-package="org.zerock.aop"/>
+
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 <!--    히카리 CP연결, 커넥션 풀 넓게 잡으려고 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
