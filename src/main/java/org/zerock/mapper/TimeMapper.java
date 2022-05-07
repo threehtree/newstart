@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 public interface TimeMapper {
@@ -8,4 +9,9 @@ public interface TimeMapper {
     //간단한 쿼리는 @이면 되지만 좀 길어지는 쿼리를 사용하기엔 어려워
     //mybatis를 사용해 xml을 쓰겟다
     public String getTime();
+    @Insert("insert into tbl_a (text) values (#{text})")
+    void insertA(String text);
+
+    @Insert("insert into tbl_b (text) values (#{text})")
+    void insertB(String text);
 }
