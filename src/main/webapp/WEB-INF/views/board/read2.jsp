@@ -39,6 +39,7 @@
 
 
     function render(obj) {
+        console.log("Render....")
         const replyUL = document.querySelector(".replyUL")
         const pageUL = document.querySelector(".pageUL")
         //state의 모든 데이터를 다시 뿌려주는 거지
@@ -60,7 +61,7 @@
     //=====================================================================
     //axios 통신
 
-    const replyService =
+    const replyService =//모듈패턴//
         // {
     //     state: initState,
     //     setState :function (changedState, callback){
@@ -74,20 +75,34 @@
     //
     //     }
     // }
-        (function (initState,callbackFn){
+        (function (initState,callback){
         let state = initState
-        const callback = callbackFn
+        // const callback = callbackFn
 
-            const setState = (newState) => {
-            state ={...state, ...newState}
+            const setState = (newState)=> {
+            state = {...state, ...newState}
                 console.log(state)
+                //newState안에 replyCount라는 속성이 있다면, pageNum이라는 속성이 있다면
+                if(newState.replyCount || newState.pageNum){
+
+                }
+
                 callback(state)
             }
-            return {setState}
-        })(initState, render())
 
-    replyService.setState({replyCount:${dto.replyCount}}, render)
-    replyService.setState({pageNum:11}, render)
+            // async function getServerList(){
+            //     const paramObj = {page: state.pageNum, size:state.size}
+            //     const res = axios.get(`/replies/list/\${state.bno}`)
+            // }(1) 18:37
+
+
+            return {setState}
+        })(initState, render)
+
+    replyService.setState({replyCount:${dto.replyCount}})
+    // replyService.setState({pageNum:11})
+
+
     <%--console.log("===================================")--%>
     <%--console.log(${dto})--%>
     <%--console.log("===================================")--%>
