@@ -36,7 +36,8 @@ public class BoardController {
         model.addAttribute("dto", service.getOne(bno));
         //쿼리 결과로 받은 boardDTO반환
 
-        return "/board/read2";
+        return  "/board/read";
+//        return "/board/read2";
         //사용자가 정의한 DTO는 다른 정의 없어도 jsp로 전달이 된다
     }
 

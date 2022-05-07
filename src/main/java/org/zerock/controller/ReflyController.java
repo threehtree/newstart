@@ -19,12 +19,14 @@ import java.util.Map;
 public class ReflyController {
     private final ReplyService replyService;
     @PostMapping("/")
-    public Map<String,Integer> register(@RequestBody ReplyDTO replyDTO){
+    public Map<String,String> register(@RequestBody ReplyDTO replyDTO){
         log.info("+++++++++++++++++++++++++++");
         log.info(replyDTO);
-        //일단 json잘 들어오는지 태스트 해보자 
+        //일단 json잘 들어오는지 태스트 해보자
 
-        return Map.of("result", 135);
+        replyService.register(replyDTO);
+
+        return Map.of("result", "success");
         //Json은 key:value 이런식이니
     }
 

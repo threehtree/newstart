@@ -19,6 +19,24 @@
 </div>
 
 <div>
+    <div>
+        <input type="text" name ="replyText" value="샘플 댓글">
+    </div>
+</div>
+<div>
+    <div>
+        <input type="text" name ="replyer" value="Test user">
+    </div>
+</div>
+
+<div>
+    <div>
+        <button class="addReplyBtn">댓글 추가</button>
+    </div>
+</div>
+
+
+<div>
     <ul class="replyUL">
 
     </ul>
@@ -28,6 +46,27 @@
 <%--첫 axios 사용겸 async ,await 에 대한 설명이 나옴--%>
 
 <script>
+    const bno = ${dto.bno} //계속 쓰이니까 빼둠
+
+    document.querySelector(".addReplyBtn").addEventListener("click", (e) => {
+        const replyTextInput = document.querySelector("input[name='replyText']")
+        const replyerInput = document.querySelector("input[name='replyer']")
+
+        const replyText = replyTextInput.value
+        const replyer = replyerInput.value
+
+        const reply = {bno,replyText, replyer}
+        //객체 리터럴을 키:값 이런식이아닌 변수명을 이용해 삽입
+        console.log(reply)
+
+        sendPost(reply)
+
+    },false)
+
+    async function sendPost(reply){
+        const res = await axios.post(`/replies/`, reply)
+        console.log(res)
+    }
 
     async function getReplyList(bno){
         try{
@@ -40,7 +79,7 @@
         }
     }
 
-    const bno = ${dto.bno}
+
         getReplyList(bno)
             .then(arr=>{
                 const liStr=arr.map(replyDTO => `<li>\${replyDTO.rno}-- \${replyDTO.replyText}</li>`).join(" ")

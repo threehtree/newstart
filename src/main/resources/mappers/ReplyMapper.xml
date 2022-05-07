@@ -6,10 +6,15 @@
 <mapper namespace="org.zerock.mapper.ReplyMapper">
 <!--댓글도 페이징 해야지 -->
     <select id="selectListOfBoard" resultType="org.zerock.domain.Reply">
-        select * from tbl_reply where bno = #{bno} order by rno asc
+        select * from tbl_reply where bno = #{bno} and rno  > 0 order by rno asc
     </select>
 <!--    일단 댓글목록을 봐야 추가 작업이 따로 생기지 -->
 <!--    bno 보드글에 몇개의 댓글이 달렷는가 -->
 <!--    mapper만듬 > 테스트-->
+<insert id="insert">
+    insert into tbl_reply (bno, replyText, replyer)
+    values (#{bno}, #{replyText}, #{replyer})
+</insert>
+<!--    insert 됬으니 ReplyCount도 증가해야한다 -->
 
 </mapper>

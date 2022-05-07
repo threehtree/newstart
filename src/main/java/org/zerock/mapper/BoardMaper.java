@@ -16,6 +16,7 @@ public interface BoardMaper extends GenericMapper<Board,Integer>{
 //    Board selectOne(Integer bno);
 //
 //    void update(Board board);
-
+    void updateReplyCount(@Param("bno") Integer bno,@Param("amount") int amount);
+    //DTO를 쓰는게 좋으나 여기서 설계 해서 넣을 정도는 아닌듯 하다
 
 }
