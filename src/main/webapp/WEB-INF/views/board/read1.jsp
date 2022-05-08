@@ -136,8 +136,8 @@
         )
     }
     qsAddEvent(".addReplyBtn","click",addServerReply)
-    qsAddEvent(".pageUL","click", (evt, realtarget)=>{
-        const num = realtarget.getAttribute("data-num")
+    qsAddEvent(".pageUL","click", (evt,realTarget) => {
+        const num = realTarget.getAttribute("data-num")
         // alert(num)
         getServerList({bno:bno,page:num,size:pageSize})
 

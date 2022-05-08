@@ -69,7 +69,7 @@ const qsAddEvent = function (selector, type, callback, tagName){
                 //.tagName으로 가져오면 테그가 대문자더라
                 return
             }
-            callback()
+            callback(e, realTarget)
 
         },false)
     }
