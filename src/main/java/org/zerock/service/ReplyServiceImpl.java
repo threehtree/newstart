@@ -36,7 +36,7 @@ public class ReplyServiceImpl implements ReplyService{
     }
 
     @Override
-    public void register(ReplyDTO replyDTO) {
+    public int register(ReplyDTO replyDTO) {
         Reply reply = modelMapper.map(replyDTO, Reply.class);
 
         replyMapper.insert(reply);
@@ -44,6 +44,8 @@ public class ReplyServiceImpl implements ReplyService{
         boardMaper.updateReplyCount(replyDTO.getBno(), 1);
         //게시물의 댓글카운트 1증가
 
+        return replyMapper.selectTotalOfBoard(replyDTO.getBno());
+        //등록한뒤에 등록포함 지금 댓글이 몇개가 있는지 알려줘야한다
     }
 
 }

@@ -12,10 +12,17 @@
 <!--    일단 댓글목록을 봐야 추가 작업이 따로 생기지 -->
 <!--    bno 보드글에 몇개의 댓글이 달렷는가 -->
 <!--    mapper만듬 > 테스트-->
-<insert id="insert">
-    insert into tbl_reply (bno, replyText, replyer)
-    values (#{bno}, #{replyText}, #{replyer})
-</insert>
+    <insert id="insert">
+        insert into tbl_reply (bno, replyText, replyer)
+        values (#{bno}, #{replyText}, #{replyer})
+    </insert>
 <!--    insert 됬으니 ReplyCount도 증가해야한다 -->
 
+    <select id="selectTotalOfBoard" resultType="int">
+        select count(rno) from tbl_reply where bno = #{bno} and rno > 0
+    </select>
+<!--특정글의 총 댓글수 -->
+<!--    where부터는 이미 index잡아 뒀으니 되도록이면-->
+<!--    index를 탈 수 있도록 맞춰주는게 좋다 -->
+<!--    where bno = #{bno} and rno > 0-->
 </mapper>

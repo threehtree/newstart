@@ -10,6 +10,10 @@ public interface ReplyMapper extends GenericMapper<Reply,Integer> {
 
      List<Reply> selectListOfBoard(@Param("bno") Integer bno,@Param("listDTO") ListDTO listDTO);
      //상속으로 받는값이 Board 객체라서 따로 작성
+     //페이징을 위해 ListDTO값을 받아야한다
 
-     //페이징을 위해 값을 받아야하는데?
+     int selectTotalOfBoard(Integer bno);
+     //특정 게시물에 댓글이 몇개?
+
+
 }

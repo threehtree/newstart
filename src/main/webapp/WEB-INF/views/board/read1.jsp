@@ -51,12 +51,17 @@
     const bno = ${dto.bno}
     const replyUL = qs(".replyUL")
     const replyCount = ${dto.replyCount}
+        //이걸 기준으로 페이지와 사이즈가 필요하다
+        //페이지랑 사이즈가 같이 쓰이니 DTO써도 좋앗을듯
+        const pageNum = 1;
+        const pageSize = 10;
+
 
     // console.log(replyService )
     // //자바를 호출하는 것처럼 함수를 호출
     // replyService.getList(bno, printReplies)
-    function getServerList(){
-        replyService.getList({bno}, (replyArr) => {
+    function getServerList(param){
+        replyService.getList(param, (replyArr) => {
             const liArr= replyArr.map(reply => `<li>\${reply.rno}</li>`)
             replyUL.innerHTML = liArr.join(" ")
             //이 함수는 axios통신 된 후에 실행되어야 한다
@@ -65,14 +70,18 @@
 
     function addServerReply(){
 
-    replyService.addReply({bno: bno,
-            replyText: qs("input[name='replyText']").value,
-            replyer:qs("input[name='replyer']").value},
+    replyService.addReply(
+        {bno: bno,
+        replyText: qs("input[name='replyText']").value,
+        replyer:qs("input[name='replyer']").value},
+        pageSize,
         //이제 값을 다 많들어 놧으니 입력하는 이벤트를 만들어야지
-        ()=> {
-            getServerList()
+        //원래 다른 방법을 쓰시려 한것 같지만 pageNum을 같이 보내자
+        (param)=> {
+            getServerList(param)
     //이걸 실행하고 응답 받으면 해야할 작업이있다=> .then, callback 이 가능하다
-        })
+        }
+        )
     }
     qsAddEvent(".addReplyBtn","click",addServerReply)
     //이벤트의 간소화를 위해 제작
@@ -85,6 +94,12 @@
     //     replyUL.innerHTML = liArr.join(" ")
     //     //이 함수는 axios통신 된 후에 실행되어야 한다
     // }
+
+    //after loading 게시글이 열릴때 댓글 목록이 보여야한다
+    const pageParam = Math.ceil(replyCount/pageSize)
+    //소수점 나오니까 반올림 해야함 ceil
+
+    getServerList({bno:bno,page:pageParam,size:pageSize})
 
 
 </script>
