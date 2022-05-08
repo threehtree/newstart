@@ -80,7 +80,7 @@
         console.log("-----set reply count new value " + num)
         replyCount = num
         qs(".replyCountShow").innerHTML= replyCount
-        console.log(replyCount)
+        printPage()
     })
         //클로저. 이걸 reply.js 에 보내서
     //reply.js에서 값을 수정하면 수정되겟지
@@ -88,25 +88,36 @@
         const pageSize = 10;
 
     function printPage(targetPage){
+
         const lastPageNum = Math.ceil(replyCount/pageSize)
 
-        let endPageNum =Math.ceil(targetPage/10)*10
+        let endPageNum = Math.ceil( (targetPage||lastPageNum) /10) * 10
+        const startPageNum = endPageNum - 9
 
-        const startPageNum = endPageNum-9
         endPageNum = lastPageNum < endPageNum ? lastPageNum: endPageNum
+
+        console.log("targetPage", targetPage, "lastPageNum", lastPageNum)
+
+        const current = targetPage? parseInt(targetPage): lastPageNum
+
 
         let str = ''
 
         if(startPageNum > 1){
             str  += `<li data-num=\${startPageNum -1} >\${startPageNum -1} 이전</li>`
-            //입력시 data-num으로 페이지를 보냄
         }
 
         for(let i = startPageNum; i< endPageNum; i++){
-            str += `<li data-num=\${i} class="\${i === pageParam?'current':''}">\${i}</li>`
+            str += `<li data-num=\${i} class="\${i === current?'current':''}">\${i}</li>`
             //입력시 data-num으로 페이지를 보냄
             //pageParam이 현재 제일 끝 페이지 , 맞으면 Css를 잡은 이름 사용
         }
+
+        if(lastPageNum < endPageNum){
+            str  += `<li data-num=\${endPageNum + 1} >\${endPageNum + 1} 다음</li>`
+        }
+
+
         pageUL.innerHTML = str
     }
 
@@ -119,6 +130,7 @@
             replyUL.innerHTML = liArr.join(" ")
             //이 함수는 axios통신 된 후에 실행되어야 한다
             printPage(param.page)
+
             //param은 현재 페이지를 가지고 있다
             //서버에서 목록가져올때 페이지도 같이 뿌리면 되지
         })
