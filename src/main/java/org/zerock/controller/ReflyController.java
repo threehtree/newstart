@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.zerock.dto.ListDTO;
 import org.zerock.dto.ReplyDTO;
 import org.zerock.service.ReplyService;
 
@@ -40,8 +41,11 @@ public class ReflyController {
     //값이 계속 바뀐다면 쿼리스트링, 아니면 Pathvariable
     //produces는 어떤 형식의 값들을 만들어 질 수 있는지
     //위에서는 "난 Json의 형식만 만든다"
-    public List<ReplyDTO> getListOfBoard(@PathVariable("bno") Integer bno){
-        return replyService.getListOfBoard(bno);
+    public List<ReplyDTO> getListOfBoard(@PathVariable("bno") Integer bno, ListDTO listDTO){
+
+        log.info("reply list.."+listDTO);
+
+        return replyService.getListOfBoard(bno,listDTO);
         //댓글 객체 전송
         //음.. Localdate 때문에 오류가 생기네
     }

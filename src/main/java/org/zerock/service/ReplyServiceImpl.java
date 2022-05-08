@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.Reply;
+import org.zerock.dto.ListDTO;
 import org.zerock.dto.ReplyDTO;
 import org.zerock.mapper.BoardMaper;
 import org.zerock.mapper.ReplyMapper;
@@ -25,9 +26,9 @@ public class ReplyServiceImpl implements ReplyService{
     private final BoardMaper boardMaper;
 
     @Override
-    public List<ReplyDTO> getListOfBoard(Integer bno) {
+    public List<ReplyDTO> getListOfBoard(Integer bno, ListDTO listDTO) {
 
-        List<Reply> replyList = replyMapper.selectListOfBoard(bno);
+        List<Reply> replyList = replyMapper.selectListOfBoard(bno, listDTO);
 
         List<ReplyDTO> dtoList = replyList.stream().map(reply -> modelMapper.map(reply, ReplyDTO.class))
                 .collect(Collectors.toList());
