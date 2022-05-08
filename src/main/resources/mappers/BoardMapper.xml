@@ -32,7 +32,7 @@
 
     <!--    select 같은경우는 값을 반환 해야 해서 받을 타입을 정해야 한다-->
     <select id="selectList"  resultType="org.zerock.domain.Board">
-        select bno,title,content,writer,regDate,updateDate
+        select bno,title,content,writer,regDate,updateDate,replyCount
         from tbl_board
 
         <include refid="search"></include>

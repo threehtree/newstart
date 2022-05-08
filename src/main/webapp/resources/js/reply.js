@@ -10,11 +10,15 @@ const replyService = (function (){
         callback()
     }
 
-    const getList = async function (bno,callback){
+    const getList = async function ({bno,page,size},callback){
         //댓글 목록 가져오기
         console.log("getlist...........")
 
-        const res =await axios.get(`/replies/list/${bno}`)
+        const parameter = {page:page||1, size:size||10}
+        //값이 없을때 기본값 지정
+
+        const res =await axios.get(`/replies/list/${bno}`,{params: parameter})
+        //{params: parameter} 이부분이 쿼리스트링 만드는 부분
         //console.log(res.data)
         callback(res.data)
 
@@ -36,4 +40,5 @@ const qsAddEvent = function (selector, type, callback){
     const target = document.querySelector(selector)
 
     target.addEventListener(type, callback, false)
+    //false는 캡쳐링 방지
 }

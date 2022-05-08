@@ -54,7 +54,10 @@
     <c:forEach items="${dtoList}" var="board">
         <li>
             <span> ${board.bno}</span>
-            <span><a href='/board/read/${board.bno}' class="dtoLink "><c:out value="${board.title}"/></a></span>
+            <span><a href='/board/read/${board.bno}' class="dtoLink ">
+                <c:out value="${board.title}"/></a>
+            [ <c:out value="${board.replyCount}"/> ]
+            </span>
 <%--            <span><a href='/board/read${listDTO.link}&bno=${board.bno}'> ${board.title}</a></span>--%>
 <%--        이제 반복문을 사용하지 않고 위임을 사용하면 이벤트를 한번만 줄 수 있다  --%>
         </li>

@@ -50,12 +50,13 @@
 
     const bno = ${dto.bno}
     const replyUL = qs(".replyUL")
+    const replyCount = ${dto.replyCount}
 
     // console.log(replyService )
     // //자바를 호출하는 것처럼 함수를 호출
     // replyService.getList(bno, printReplies)
     function getServerList(){
-        replyService.getList(bno, (replyArr) => {
+        replyService.getList({bno}, (replyArr) => {
             const liArr= replyArr.map(reply => `<li>\${reply.rno}</li>`)
             replyUL.innerHTML = liArr.join(" ")
             //이 함수는 axios통신 된 후에 실행되어야 한다
@@ -69,10 +70,7 @@
             replyer:qs("input[name='replyer']").value},
         //이제 값을 다 많들어 놧으니 입력하는 이벤트를 만들어야지
         ()=> {
-            alert("replyadd...")
             getServerList()
-
-
     //이걸 실행하고 응답 받으면 해야할 작업이있다=> .then, callback 이 가능하다
         })
     }
