@@ -61,15 +61,23 @@
             //이 함수는 axios통신 된 후에 실행되어야 한다
         })
     }
-    replyService.addReply({bno: bno, replyText: 'AAAAA', replyer: 'user2939'},
+
+    function addServerReply(){
+
+    replyService.addReply({bno: bno,
+            replyText: qs("input[name='replyText']").value,
+            replyer:qs("input[name='replyer']").value},
+        //이제 값을 다 많들어 놧으니 입력하는 이벤트를 만들어야지
         ()=> {
             alert("replyadd...")
             getServerList()
 
-    })
+
     //이걸 실행하고 응답 받으면 해야할 작업이있다=> .then, callback 이 가능하다
-
-
+        })
+    }
+    qsAddEvent(".addReplyBtn","click",addServerReply)
+    //이벤트의 간소화를 위해 제작
 
     // function printReplies(replyArr){
     //     //목록 출력용

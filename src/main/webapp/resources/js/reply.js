@@ -31,3 +31,9 @@ const replyService = (function (){
 const qs = function (str){
     return document.querySelector(str)
 }//노가다 하기 싫음 , 전역변수화
+
+const qsAddEvent = function (selector, type, callback){
+    const target = document.querySelector(selector)
+
+    target.addEventListener(type, callback, false)
+}
