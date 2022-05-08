@@ -56,13 +56,17 @@ const qs = function (str){
 }//노가다 하기 싫음 , 전역변수화
 
 const qsAddEvent = function (selector, type, callback, tagName){
+    //이벤트 위임용으로 따로 작성하려 했으나
+    //JS는 파라메터 상관없이 작동은 한다는 점을 이용
     const target = document.querySelector(selector)
 
     if(!tagName){
         target.addEventListener(type, callback, false)
+        //tagName이라는 파라미터가 없으면 이걸 실행
         //false는 캡쳐링 방지
     }else{
-        target.addEventListener(type,(e) => {
+        //이벤트 위임용용
+       target.addEventListener(type,(e) => {
             const realTarget = e.target
 
             if(realTarget.tagName !== tagName.toUpperCase()){

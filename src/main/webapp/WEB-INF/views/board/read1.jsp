@@ -87,9 +87,10 @@
         const pageNum = 1;
         const pageSize = 10;
 
-    function printPage(){
+    function printPage(targetPage){
         const lastPageNum = Math.ceil(replyCount/pageSize)
-        let endPageNum =Math.ceil(lastPageNum/10)*10
+
+        let endPageNum =Math.ceil(targetPage/10)*10
 
         const startPageNum = endPageNum-9
         endPageNum = lastPageNum < endPageNum ? lastPageNum: endPageNum
@@ -98,10 +99,12 @@
 
         if(startPageNum > 1){
             str  += `<li data-num=\${startPageNum -1} >\${startPageNum -1} 이전</li>`
+            //입력시 data-num으로 페이지를 보냄
         }
 
         for(let i = startPageNum; i< endPageNum; i++){
             str += `<li data-num=\${i} class="\${i === pageParam?'current':''}">\${i}</li>`
+            //입력시 data-num으로 페이지를 보냄
             //pageParam이 현재 제일 끝 페이지 , 맞으면 Css를 잡은 이름 사용
         }
         pageUL.innerHTML = str
@@ -115,7 +118,8 @@
             const liArr= replyArr.map(reply => `<li>\${reply.rno}</li>`)
             replyUL.innerHTML = liArr.join(" ")
             //이 함수는 axios통신 된 후에 실행되어야 한다
-            printPage()
+            printPage(param.page)
+            //param은 현재 페이지를 가지고 있다
             //서버에서 목록가져올때 페이지도 같이 뿌리면 되지
         })
     }
@@ -137,9 +141,12 @@
     }
     qsAddEvent(".addReplyBtn","click",addServerReply)
     qsAddEvent(".pageUL","click", (evt,realTarget) => {
+        //이벤트 위임을 위해 만듬
         const num = realTarget.getAttribute("data-num")
+        //페이지 버튼마다 자신의 페이지를 data- 로 보낸다
         // alert(num)
         getServerList({bno:bno,page:num,size:pageSize})
+        //페이지 이동햇으니 새로 뿌려준다
 
     }, "li")
 
