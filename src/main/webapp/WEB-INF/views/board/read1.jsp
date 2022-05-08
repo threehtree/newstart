@@ -54,16 +54,31 @@
     // console.log(replyService )
     // //자바를 호출하는 것처럼 함수를 호출
     // replyService.getList(bno, printReplies)
-    replyService.getList(bno, printReplies)
-
-    function printReplies(replyArr){
-        //목록 출력용
-
-        const liArr= replyArr.map(reply => {`<li>AAA<li>`
+    function getServerList(){
+        replyService.getList(bno, (replyArr) => {
+            const liArr= replyArr.map(reply => `<li>\${reply.rno}</li>`)
+            replyUL.innerHTML = liArr.join(" ")
+            //이 함수는 axios통신 된 후에 실행되어야 한다
         })
-        replyUL.innerHTML = liArr.join(" ")
-        //이 함수는 axios통신 된 후에 실행되어야 한다
     }
+    replyService.addReply({bno: bno, replyText: 'AAAAA', replyer: 'user2939'},
+        ()=> {
+            alert("replyadd...")
+            getServerList()
+
+    })
+    //이걸 실행하고 응답 받으면 해야할 작업이있다=> .then, callback 이 가능하다
+
+
+
+    // function printReplies(replyArr){
+    //     //목록 출력용
+    //
+    //     const liArr= replyArr.map(reply => `<li>AAA<li>`
+    //     )
+    //     replyUL.innerHTML = liArr.join(" ")
+    //     //이 함수는 axios통신 된 후에 실행되어야 한다
+    // }
 
 
 </script>

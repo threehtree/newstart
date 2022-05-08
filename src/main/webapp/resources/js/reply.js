@@ -2,9 +2,12 @@
 const replyService = (function (){
 
 
-    const addReply = function (replyObj){
+    const addReply = async function (replyObj, callback){
         //댓글 추가
         console.log("AddReply...........")
+
+        const res = await axios.post("/replies/", replyObj)
+        callback()
     }
 
     const getList = async function (bno,callback){
