@@ -99,6 +99,7 @@
         console.log("targetPage", targetPage, "lastPageNum", lastPageNum)
 
         const current = targetPage? parseInt(targetPage): lastPageNum
+        //만약에 targetPage가 잇으면 진짜 페이지, 아니면 가짜엔드페이지
 
 
         let str = ''
