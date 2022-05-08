@@ -37,7 +37,28 @@
 
 
 <div>
+    <h2 class="replyCountShow"></h2>
     <ul class="replyUL">
+
+    </ul>
+    <style>
+        .pageUL {
+            display: flex;
+
+        }
+        .pageUL li {
+            list-style: none;
+            margin: 0.1em;
+            border: 1px solid blue;
+        }
+        .pageUL .current {
+            background-color: blue;
+        }
+
+    </style>
+
+
+    <ul class="pageUL">
 
     </ul>
 </div>
@@ -50,12 +71,41 @@
 
     const bno = ${dto.bno}
     const replyUL = qs(".replyUL")
-    const replyCount = ${dto.replyCount}
+    const pageUL = qs(".pageUL")
+    let replyCount = ${dto.replyCount}
+    //댓글이 추가/삭제시 갯수를 맞추기 위해
         //이걸 기준으로 페이지와 사이즈가 필요하다
         //페이지랑 사이즈가 같이 쓰이니 DTO써도 좋앗을듯
+    replyService.setReplyCount (function (num) {
+        console.log("-----set reply count new value " + num)
+        replyCount = num
+        qs(".replyCountShow").innerHTML= replyCount
+        console.log(replyCount)
+    })
+        //클로저. 이걸 reply.js 에 보내서
+    //reply.js에서 값을 수정하면 수정되겟지
         const pageNum = 1;
         const pageSize = 10;
 
+    function printPage(){
+        const lastPageNum = Math.ceil(replyCount/pageSize)
+        let endPageNum =Math.ceil(lastPageNum/10)*10
+
+        const startPageNum = endPageNum-9
+        endPageNum = lastPageNum < endPageNum ? lastPageNum: endPageNum
+
+        let str = ''
+
+        if(startPageNum > 1){
+            str  += `<li data-num=\${startPageNum -1} >\${startPageNum -1} 이전</li>`
+        }
+
+        for(let i = startPageNum; i< endPageNum; i++){
+            str += `<li data-num=\${i} class="\${i === pageParam?'current':''}">\${i}</li>`
+            //pageParam이 현재 제일 끝 페이지 , 맞으면 Css를 잡은 이름 사용
+        }
+        pageUL.innerHTML = str
+    }
 
     // console.log(replyService )
     // //자바를 호출하는 것처럼 함수를 호출
@@ -65,6 +115,8 @@
             const liArr= replyArr.map(reply => `<li>\${reply.rno}</li>`)
             replyUL.innerHTML = liArr.join(" ")
             //이 함수는 axios통신 된 후에 실행되어야 한다
+            printPage()
+            //서버에서 목록가져올때 페이지도 같이 뿌리면 되지
         })
     }
 
@@ -84,6 +136,15 @@
         )
     }
     qsAddEvent(".addReplyBtn","click",addServerReply)
+    qsAddEvent(".pageUL","click", (evt, realtarget)=>{
+        const num = realtarget.getAttribute("data-num")
+        // alert(num)
+        getServerList({bno:bno,page:num,size:pageSize})
+
+    }, "li")
+
+    //이벤트 위임은 안되는 녀석
+
     //이벤트의 간소화를 위해 제작
 
     // function printReplies(replyArr){
@@ -100,6 +161,7 @@
     //소수점 나오니까 반올림 해야함 ceil
 
     getServerList({bno:bno,page:pageParam,size:pageSize})
+
 
 
 </script>

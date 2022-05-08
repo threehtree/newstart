@@ -1,5 +1,11 @@
+//axios 통신용
+const replyService = (function(){
 
-const replyService = (function (){
+    let replyCountFn;
+
+    const setReplyCount = function(fn){
+        replyCountFn = fn
+    }
 
 
     const addReply = async function (replyObj, size, callback){
@@ -14,6 +20,10 @@ const replyService = (function (){
         //이걸 addReply호출때 마다 값을 가져올까?
         //reply.js라는 모듈패턴 에 아예 잡아둘까?
         //모듈패턴은 데이터를 유지 가능하다 [클로저]
+
+        replyCountFn(replyCount)
+
+
         const bno = replyObj.bno
         const page = Math.ceil(replyCount/size)
         callback({bno,page,size})
@@ -33,7 +43,7 @@ const replyService = (function (){
 
     }
 
-    return {addReply,getList}
+    return {addReply,getList,setReplyCount}
     //이렇게 되면 외부에서 참조할수 있다
     //replyService.getList 이런식
     //함수를 모듈처럼 쓸 수 있다
@@ -45,9 +55,24 @@ const qs = function (str){
     return document.querySelector(str)
 }//노가다 하기 싫음 , 전역변수화
 
-const qsAddEvent = function (selector, type, callback){
+const qsAddEvent = function (selector, type, callback, tagName){
     const target = document.querySelector(selector)
 
-    target.addEventListener(type, callback, false)
-    //false는 캡쳐링 방지
+    if(!tagName){
+        target.addEventListener(type, callback, false)
+        //false는 캡쳐링 방지
+    }else{
+        target.addEventListener(type,(e) => {
+            const realTarget = e.target
+
+            if(realTarget.tagName !== tagName.toUpperCase()){
+                //.tagName으로 가져오면 테그가 대문자더라
+                return
+            }
+            callback()
+
+        },false)
+    }
+
 }
+
