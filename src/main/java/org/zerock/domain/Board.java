@@ -17,6 +17,8 @@ public class Board {
     private String title;
     private String content;
     private String writer;
+    private int replyCount;
+    //댓글은 기본은 0개다1
 
     private LocalDateTime regDate;
     private LocalDateTime updateDate;

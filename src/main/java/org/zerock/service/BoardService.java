@@ -15,5 +15,5 @@ public interface BoardService {
 
     void update(BoardDTO boardDTO);
     void remove(Integer bno);
-
+//    void modify(Integer bno);
 }

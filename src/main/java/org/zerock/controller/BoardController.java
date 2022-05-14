@@ -36,7 +36,9 @@ public class BoardController {
         model.addAttribute("dto", service.getOne(bno));
         //쿼리 결과로 받은 boardDTO반환
 
-        return "/board/read";
+//        return  "/board/read";
+          return  "/board/read1";
+//        return "/board/read2";
         //사용자가 정의한 DTO는 다른 정의 없어도 jsp로 전달이 된다
     }
 
@@ -90,6 +92,8 @@ public class BoardController {
 
     }
 
+
+
     @PostMapping("/register")
     public String registerPost(BoardDTO boardDTO, RedirectAttributes rttr){
         log.info("----------------");
@@ -123,5 +127,31 @@ public class BoardController {
         rttr.addFlashAttribute("result", "removed");
 
         return "redirect:/board/list"; 
+    }
+    @PostMapping("/modify/{bno}")
+    public String modifyPost(@PathVariable("bno") Integer bno,BoardDTO boardDTO, ListDTO listDTO,RedirectAttributes rttr){
+        //튕겨내면서 파라메터를 줄려면 redirectAttribute를 써야함
+        //검색조건 유지를 위해 ListDTO도 필요하다
+        //**그렇게 궁금햇던 @PathVariable은 URL경로의 bno를 가져온거임[pdf4참고]
+        log.info("-------------");
+        log.info("-------------");
+        boardDTO.setBno(bno);
+        //수정하면서 bno값이 바뀔수 있어서 다시 지정
+        log.info("modify" + boardDTO);
+        //수정했으니까 수정내역을 보여줘야지
+        log.info("-------------");
+        service.update(boardDTO);
+
+//        rttr.addAttribute("bno", bno);
+        //redirect시 지금 나의bno값이 uri를 통해 전달된다?
+//        rttr.addAttribute("page", listDTO.getPage());
+        //우리는 이미 링크를 만들어 둿다
+
+        log.info("-------------");
+        rttr.addFlashAttribute("result", "modified");
+
+        return "redirect:/board/read/"+bno+listDTO.getLink();
+        //우리가 방금 열어봣던 글로 돌아가야하니까
+        //listDTO에 이미 만들어 둿던 getLink사용
     }
 }

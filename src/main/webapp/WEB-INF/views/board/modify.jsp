@@ -8,25 +8,35 @@
 <%--기능이 사실상 read 와 거의 똑같다--%>
 <body>
 <h1>Modify</h1>
-${listDTO}/
+${listDTO}///
 ${dto}
+${board}////
+<%--boarDTO는 서비스 단에서 넘겨줫어.--%>
 
-<div>
+<form class="modForm" action="/board/modify/${dto.bno}" method="post">
+    <input type="hidden" name="page" value="${listDTO.page}">
+<%--    form가 나온것 -> 값을 보낸다 --%>
+<%--    현재 ListDTO가 페이지에 관련된건 다 수집중--%>
+    <input type="hidden" name="size" value="${listDTO.size}">
+    <input type="hidden" name="type" value="${listDTO.type}">
+    <input type="hidden" name="keyword" value="${listDTO.keyword}">
     <div>
-        <input type ="text" name="bno" value="<c:out value="${dto.bno}"/>" readonly>
+        <div>
+            <input type ="text" name="bno" value="<c:out value="${dto.bno}"/>" readonly>
+        </div>
     </div>
-</div>
-<div>
     <div>
-        <input type ="text" name="title" value="<c:out value="${dto.title}"/>" >
+        <div>
+            <input type ="text" name="title" value="<c:out value="${dto.title}"/>" >
+        </div>
     </div>
-</div>
-<div>
     <div>
-        <textarea name="content"><c:out value="${dto.content}"/></textarea>
+        <div>
+            <textarea name="content"><c:out value="${dto.content}"/></textarea>
+<%--            <textarea></textarea> 이 사이에 여백있으면 랜더링때 그대로 반영됨 --%>
+        </div>
     </div>
-</div>
-
+</form>
 
 <div>
     <button class="listBtn">리스트</button>
@@ -62,6 +72,14 @@ ${dto}
             actionForm.submit()
 
         },false)
+
+        sQuery(".modPostBtn").addEventListener("click", (e)=>{
+
+            sQuery(".modForm").submit()
+
+        },false)
+    //이건 Post식으로 넘어가니까 url페이징한게 날라가버린다, ListDTO로 재지정해야겟다
+    //페이로드 확인 하면 우리가 아까 파라메터로 받았던 값이 보인다 /이걸 링크로 다시 만들어야한다
 
     //현재 우리가 계속 써야하는 값이 ListDTO에 모두 있다
 </script>
