@@ -10,35 +10,57 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 @Controller
 @Log4j2
 public class UploadController {
 
     @PostMapping("/upload1")
-    public void upload1(MultipartFile[] files){
+    public void upload1(MultipartFile[] files) {
 
-       log.info("----------------------------------");
+        log.info("----------------------------------");
 
-       log.info(files);
+        log.info(files);
 
-        for (MultipartFile file:files) {
-            log.info(file.getOriginalFilename());
+        for (MultipartFile file : files) {
+
+            String originalFileName = file.getOriginalFilename();
+
+            String saveName = UUID.randomUUID().toString() + "_" + originalFileName;
+            //파일이름 중복방지를 위한 uuid추가
+
             log.info(file.getResource());
-            log.info("-----------------------");
+            String saveFolder = makeFolders();
 
 
-
-            try(InputStream in = file.getInputStream();
-                FileOutputStream fos = new FileOutputStream("C:\\Upload\\"+file.getOriginalFilename());
-            )
-            {
-                FileCopyUtils.copy(in,fos);
+            try (InputStream in = file.getInputStream();
+                 FileOutputStream fos = new FileOutputStream("C:\\upload\\" +saveFolder+"\\"+ saveName);
+            ) {
+                FileCopyUtils.copy(in, fos);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         }//end for
+
+
+    }
+
+    private String makeFolders() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        //이 양식으로 폴더를 만들것
+        String str = sdf.format(new Date());
+
+        File folderPath = new File("C:\\upload\\" + str);
+
+        if (!folderPath.exists()) {
+            //폴더가 있는지 확인
+            folderPath.mkdirs();
+        }
+        return str;
 
     }
 }
