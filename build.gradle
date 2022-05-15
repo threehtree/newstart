@@ -92,6 +92,10 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.9.9.1'
     //AOP 사용을 위해 트랜젝션을 잡기위해 사용
 
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    implementation 'net.coobird:thumbnailator:0.4.17'
+    //섬네일 제작
+
 }
 
 test {

@@ -1,23 +1,23 @@
 <%--
   Created by IntelliJ IDEA.
-  User: ehdwn
-  Date: 2022-04-30
-  Time: 오후 4:07
+  User: cooki
+  Date: 2022-04-13
+  Time: 오후 12:56
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>register</title>
+    <title>Title</title>
 </head>
 <body>
-<h1>Register</h1>
+<h1>Register Page</h1>
 <form action="/board/register" method="post">
     <input type="text" name="title">
-    <button>Click</button>
+    <button>CLICK</button>
 </form>
 
-<h2>파일 업로드 테스트 </h2>
+<h2>파일 업로드 테스트</h2>
 <form action="/upload1" method="post" enctype="multipart/form-data">
     <input type="file" name="files" multiple>
     <button>Upload</button>
@@ -28,35 +28,54 @@
     <input type="file" name="upload" multiple class="uploadFile">
     <button class="uploadBtn">UPLOAD</button>
 </div>
-<%--<img src="C:\upload\1승리 - 복사본">--%>
+
+<div class="uploadResult">
+<%--    여기에 받은 form데이타값 넣을것--%>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-    document.querySelector(".uploadBtn").addEventListener("click", (e)=>{
-        const formobj = new FormData();
+    const uploadResult = document.querySelector(".uploadResult")
+
+    document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
+        //axios통신을 위한 부분임
+        const formObj = new FormData();
+        //파일의 통신은 formdata를 사용해야한다함
+
         const fileInput = document.querySelector(".uploadFile")
+
+        console.log(fileInput)
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         console.log(fileInput.files)
+
+
         const files = fileInput.files
-        console.log(files.length)
+        //파일에 대한 상세내용
 
-        for(let i = 0 ; i < files.length; i++){
+        for (let i = 0; i < files.length; i++) {
             console.log(files[i])
-            //FormData 형식으로 파일값을 가져옴
-            formobj.append("files", files[i]);
-            // 우리가 multiple이라 여러파일을 다 추가해야한다
-            uploadToServer(formobj)
-
+            formObj.append("files", files[i])
+            //지금 여러개의 파일을 보내서 배열
         }
+
+        uploadToServer(formObj).then(resultArr =>{
+            uploadResult.innerHTML = resultArr.map(result =>`<div>
+            <img src="/view?fileName=\${result.thumbnail}">
+            <button class = "delBtn">x</button>
+            \${result.original}</div>`).join(" ")
+            // 배열로 값이 뽑혀서 이렇게 join으로 하나의 문자열로 다 뽑아줘야함
+            //00
+        })
+
     }, false)
 
 
-
-
-//---------------------------------------------------------------------
     async function uploadToServer (formObj) {
 
         console.log("upload to server......")
-        console.log(formObj)//FormData 받음
+        console.log(formObj)
 
         const response = await axios({
             method: 'post',
@@ -68,8 +87,9 @@
         });
 
         return response.data
-        //비동기는 promise 반환
+        //axios통신후 json문자열을 가져온듯
     }
+
 </script>
 
 </body>
