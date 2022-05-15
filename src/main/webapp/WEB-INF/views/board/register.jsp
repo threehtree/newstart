@@ -38,6 +38,18 @@
 
 <script>
     const uploadResult = document.querySelector(".uploadResult")
+    uploadResult.addEventListener("click",(e)=> {
+        if(e.target.getAttribute("class").indexOf("delBtn") < 0 ){
+            return
+        }
+
+        const link = e.target.getAttribute("data-link")
+        alert(link)
+        // 이제 버튼 누르면 링크 나오네
+        //이제 axios로 post전송해야지
+        // 문제는 이제 서버에서 원본, 섬네일 둘다 삭제해야한다
+
+    },false)
 
     document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
         //axios통신을 위한 부분임
@@ -63,10 +75,14 @@
         uploadToServer(formObj).then(resultArr =>{
             uploadResult.innerHTML = resultArr.map(result =>`<div>
             <img src="/view?fileName=\${result.thumbnail}">
-            <button class = "delBtn">x</button>
+            <button data-link ='\${result.link}' class = "delBtn">x</button>
             \${result.original}</div>`).join(" ")
             // 배열로 값이 뽑혀서 이렇게 join으로 하나의 문자열로 다 뽑아줘야함
-            //00
+            //파일 삭제를 위해서는 파일의 경로와 이름을 알아야지
+            //data- 로 링크를 주면 파일 자체는 삭제가 가능한데 섬네일은 앞의 경로를 잘라야지
+            //삭제는axios를 post로 보내야하니 아예 data-로  엄청 보내버리자
+            //이러면 버튼의 경로를 따올수 있지 , 이 값을 서버에 보내줘야하고 처리니 post
+            //다만 파일 업로드해야 x버튼이 생기니 이벤트 위임하자
         })
 
     }, false)

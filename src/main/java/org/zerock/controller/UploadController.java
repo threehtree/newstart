@@ -54,6 +54,9 @@ public class UploadController {
             e.printStackTrace();
             return ResponseEntity.status(404).build();
             //실패할 경우 404에러를 보낸다
+            //[[이제 삭제를 해야하는데 db에서도 삭제해야해서 axios에 접근해야지
+            //[[내가 클릭하면 크게 보거나 다운로드하게 될 경우도 있다
+            //삭제를 해야한다 div에 버튼을 만들어서 삭제하자 
         }
 
 
