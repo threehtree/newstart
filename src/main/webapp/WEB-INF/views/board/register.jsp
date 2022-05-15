@@ -44,10 +44,13 @@
         }
 
         const link = e.target.getAttribute("data-link")
-        alert(link)
+        // alert(link)
         // 이제 버튼 누르면 링크 나오네
         //이제 axios로 post전송해야지
         // 문제는 이제 서버에서 원본, 섬네일 둘다 삭제해야한다
+
+        deleteToServer(link)
+        //이건 반환값이 promise 입니다
 
     },false)
 
@@ -86,6 +89,21 @@
         })
 
     }, false)
+    async function deleteToServer(fileName){
+        //근데 또 문제가 ㅋㅋㅋ
+        //axios의 장점은 다 json인데
+        //문제는 전달할 데이터는 이름 뿐인데 key,값 이렇게 보내야하는데
+        //그럼 어떻게 처리할 까? axois post 데이터 전송
+        const options = {headers: { "Content-Type": "application/x-www-form-urlencoded"}}
+
+        const res = await axios.post("/delete", "fileName="+fileName, options )
+        //이렇게 해야 axios로 파일 명만 보낼수 잇음[키,값]
+        //이제 실제파일, 웹화면에서 삭제해야지
+
+        console.log(res.data)
+        // return res.data
+        //
+    }
 
 
     async function uploadToServer (formObj) {

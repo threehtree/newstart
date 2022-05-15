@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -56,10 +57,25 @@ public class UploadController {
             //실패할 경우 404에러를 보낸다
             //[[이제 삭제를 해야하는데 db에서도 삭제해야해서 axios에 접근해야지
             //[[내가 클릭하면 크게 보거나 다운로드하게 될 경우도 있다
-            //삭제를 해야한다 div에 버튼을 만들어서 삭제하자 
+            //삭제를 해야한다 div에 버튼을 만들어서 삭제하자
         }
 
 
+    }
+    @PostMapping("/delete")
+    @ResponseBody
+    //axios 통신때 뭔가 계속 경로는 맞는데 안들어가면 의심...
+    public Map<String, String> deleteFile(String fileName){
+
+
+        int idx = fileName.lastIndexOf("/");
+        String path = fileName.substring(0,idx);
+        String name = fileName.substring(idx+1); //uuid_fileName
+                //파일이름을 위해 잘라내야함
+        log.info("path: "+path);
+        log.info("name: "+name);
+
+        return Map.of("result", "success");
     }
 
 
