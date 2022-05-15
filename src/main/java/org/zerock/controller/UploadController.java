@@ -2,6 +2,7 @@ package org.zerock.controller;
 
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,36 @@ import java.util.UUID;
 @Log4j2
 public class UploadController {
     @GetMapping("/view")
+    @ResponseBody
     //filename을 받아오게 사용하고 싶지만 파일의 링크가 / 때문에 path로 끊겨 힘들다
     //그럼 쿼리스트링으로 넘기자
-    public void viewFile(String fileName){
+    public ResponseEntity<byte[]> viewFile(String fileName){
+        //파일 전송은 byte[]이지
         log.info("==============================");
         log.info("file name.............."+ fileName);
+
+        File targetFile = new File("C:\\upload\\"+fileName);
+        log.info(targetFile);
+        //파일 존재 확인
+
+        //이제 파일을 jsp로 보내야지
+        //근데 브라우저에 값을 보낼때는 mime이런거 보냈잖아? 서블릿 생각해봐
+        try {
+            String mimeType = Files.probeContentType(targetFile.toPath());
+            // 마임타입 확인 ㅇㅋ 이제 응답해줘야지
+            //브라우저에 이미지를 보내야하는데 http에 맞춰 보내야한다
+             log.info(mimeType);
+
+             //이제 entty로 바꿧고 byte[]보내야 하니까 수정하자
+            byte[] data = FileCopyUtils.copyToByteArray(targetFile);
+            //유틸이 있어서 편하네
+            return ResponseEntity.ok().header("Content-Type",mimeType).body(data);
+            //성공한 경우
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).build();
+            //실패할 경우 404에러를 보낸다
+        }
 
 
     }
